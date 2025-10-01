@@ -1,4 +1,4 @@
-I'm Evan! I'm a **senior machine learning consultant lead**, **GenAI technical leader**, **data engineer**, and **fullstack software developer**.
+I'm a **senior machine learning consultant lead**, **GenAI technical leader**, **data engineer**, and **fullstack software developer**.
 
 In the realm of **ML**, I specialize in the fields of natural language processing, computer vision, deep learning, and generative AI, with research papers published in **two Scopus-indexed conferences**.
 
