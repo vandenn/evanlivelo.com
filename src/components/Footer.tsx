@@ -21,7 +21,7 @@ export default function Footer() {
               href="https://github.com/evanlivelo"
               target="_blank"
               rel="noopener noreferrer"
-              className="footer-icon"
+              className={styles.footerIcon}
               aria-label="GitHub"
             >
               <svg
@@ -38,7 +38,7 @@ export default function Footer() {
               href="https://linkedin.com/in/evanlivelo"
               target="_blank"
               rel="noopener noreferrer"
-              className="footer-icon"
+              className={styles.footerIcon}
               aria-label="LinkedIn"
             >
               <svg
