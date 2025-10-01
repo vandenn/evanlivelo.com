@@ -8,8 +8,8 @@ export default function About() {
   const education = getEducationFiles();
 
   const markdownComponents = {
-    ul: ({ children }: any) => <ul className="list-disc list-inside space-y-2 my-4">{children}</ul>,
-    ol: ({ children }: any) => <ol className="list-decimal list-inside space-y-2 my-4">{children}</ol>,
+    ul: ({ children }: any) => <ul className="list-disc list-inside space-y-1 my-4">{children}</ul>,
+    ol: ({ children }: any) => <ol className="list-decimal list-inside space-y-1 my-4">{children}</ol>,
     li: ({ children }: any) => <li>{children}</li>,
     p: ({ children }: any) => <p className="my-2">{children}</p>,
     strong: ({ children }: any) => <strong className="font-bold">{children}</strong>,
@@ -29,12 +29,12 @@ export default function About() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mt-8 mb-4">Experience</h2>
+          <h2 className="text-2xl mt-8 mb-4">Experience</h2>
           {experiences.map((exp, index) => (
             <div key={index} className="mb-6">
               <div className="mb-2">
-                <h3 className="text-xl font-semibold">{exp.frontmatter.title}</h3>
-                <div className="text-sm text-gray-400">
+                <h3 className="text-xl">{exp.frontmatter.title}</h3>
+                <div className="text-sm">
                   {exp.frontmatter.company} • {exp.frontmatter.range}
                 </div>
               </div>
@@ -46,12 +46,12 @@ export default function About() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mt-8 mb-4">Education</h2>
+          <h2 className="text-2xl mt-8 mb-4">Education</h2>
           {education.map((edu, index) => (
             <div key={index} className="mb-6">
               <div className="mb-2">
-                <h3 className="text-xl font-semibold">{edu.frontmatter.degree}</h3>
-                <div className="text-sm text-gray-400">
+                <h3 className="text-xl">{edu.frontmatter.degree}</h3>
+                <div className="text-sm">
                   {edu.frontmatter.institution} • {edu.frontmatter.range}
                 </div>
               </div>

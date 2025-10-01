@@ -8,8 +8,8 @@ export default function Projects() {
   const publications = getPublicationFiles();
 
   const markdownComponents = {
-    ul: ({ children }: any) => <ul className="list-disc list-inside space-y-2 my-4">{children}</ul>,
-    ol: ({ children }: any) => <ol className="list-decimal list-inside space-y-2 my-4">{children}</ol>,
+    ul: ({ children }: any) => <ul className="list-disc list-inside space-y-1 my-4">{children}</ul>,
+    ol: ({ children }: any) => <ol className="list-decimal list-inside space-y-1 my-4">{children}</ol>,
     li: ({ children }: any) => <li>{children}</li>,
     p: ({ children }: any) => <p className="my-2">{children}</p>,
     strong: ({ children }: any) => <strong className="font-bold">{children}</strong>,
@@ -23,7 +23,6 @@ export default function Projects() {
 
       <div className="space-y-8">
         <section>
-          <h2 className="text-2xl font-bold mb-4">Projects</h2>
           {projects.map((project, index) => (
             <div key={index} className="mb-8 flex flex-col md:flex-row gap-6">
               {project.frontmatter.image && (
@@ -40,7 +39,7 @@ export default function Projects() {
               )}
               <div className="flex-1">
                 <div className="mb-2">
-                  <h3 className="text-xl font-semibold">
+                  <h3 className="text-xl">
                     {project.frontmatter.link ? (
                       <a
                         href={project.frontmatter.link}
@@ -76,11 +75,11 @@ export default function Projects() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mt-8 mb-4">Publications</h2>
+          <h2 className="text-2xl mt-8 mb-4">Publications</h2>
           {publications.map((pub, index) => (
             <div key={index} className="mb-6">
               <div className="mb-2">
-                <h3 className="text-xl font-semibold">
+                <h3 className="text-xl">
                   {pub.frontmatter.link ? (
                     <a
                       href={pub.frontmatter.link}
