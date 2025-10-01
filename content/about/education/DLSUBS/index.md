@@ -8,4 +8,4 @@ link: "https://www.dlsu.edu.ph"
 
 - Magna Cum Laude
 - Most Outstanding Thesis Award (Gold)
-- (Published in the 2017 IJCAI Workshop on Semantic Machine Learning) Thesis focused on the use of both machine learning and rule-based approaches to develop a hybrid system for extracting the 5Ws (who, when, where, what, and why) of Filipino news articles.
+- _(Published in the 2017 IJCAI Workshop on Semantic Machine Learning)_ Thesis focused on the use of both machine learning and rule-based approaches to develop a hybrid system for extracting the 5Ws (who, when, where, what, and why) of Filipino news articles.
