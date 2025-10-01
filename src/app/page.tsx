@@ -21,7 +21,7 @@ export default function Home() {
         <div className="flex justify-center lg:justify-end max-sm:order-first">
           <div className="relative w-40 h-40 lg:w-64 lg:h-64">
             <Image
-              src="/me.png"
+              src="/images/me.png"
               alt="Evan Livelo"
               fill
               className="rounded-full object-cover"
