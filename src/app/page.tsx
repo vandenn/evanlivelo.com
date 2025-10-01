@@ -2,7 +2,8 @@ import Image from "next/image";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import LinkButton from "@/components/LinkButton";
-import { UserIcon, WrenchIcon, MailIcon, DocumentIcon } from "@/components/icons";
+import SocialIconButton from "@/components/SocialIconButton";
+import { UserIcon, WrenchIcon, MailIcon, DocumentIcon, GitHubIcon, LinkedInIcon, SocialsMailIcon } from "@/components/icons";
 import { getMarkdownContent } from '@/lib/markdown';
 
 export default function Home() {
@@ -15,7 +16,7 @@ export default function Home() {
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 items-center mb-12 max-sm:gap-6">
-        <div className="space-y-2">
+        <div className="space-y-4">
           <h1 className="text-5xl lg:text-7xl leading-tight">
             <span style={{ color: "var(--text)" }}>Hi! I'm </span>
             <span style={{ color: "var(--accent)" }}>Evan Livelo</span>
@@ -26,6 +27,27 @@ export default function Home() {
             <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
               {homeContent.content}
             </ReactMarkdown>
+          </div>
+
+          <div className="flex gap-4 items-center pt-2">
+            <SocialIconButton
+              href="mailto:evan.livelo@gmail.com"
+              ariaLabel="Email"
+              icon={<SocialsMailIcon />}
+              className="hover:opacity-70 transition-opacity"
+            />
+            <SocialIconButton
+              href="https://github.com/vandenn"
+              ariaLabel="GitHub"
+              icon={<GitHubIcon />}
+              className="hover:opacity-70 transition-opacity"
+            />
+            <SocialIconButton
+              href="https://linkedin.com/in/evanlivelo"
+              ariaLabel="LinkedIn"
+              icon={<LinkedInIcon />}
+              className="hover:opacity-70 transition-opacity"
+            />
           </div>
         </div>
 
