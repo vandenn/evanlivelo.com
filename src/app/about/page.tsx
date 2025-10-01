@@ -1,5 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import LinkButton from '@/components/LinkButton';
+import { MailIcon, DocumentIcon } from '@/components/icons';
 import { getMarkdownContent, getExperienceFiles, getEducationFiles } from '@/lib/markdown';
 
 export default function About() {
@@ -27,6 +29,19 @@ export default function About() {
             {aboutContent.content}
           </ReactMarkdown>
         </section>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center my-8">
+          <LinkButton href="mailto:evan.livelo@gmail.com" icon={<MailIcon />}>
+            Get in touch
+          </LinkButton>
+          <LinkButton
+            href="https://drive.google.com/file/d/1lVXxnXQq8VAEACIecbdmW-O1AFSAf2e0/view?usp=sharing"
+            icon={<DocumentIcon />}
+            external
+          >
+            Download my CV
+          </LinkButton>
+        </div>
 
         <section>
           <h2 className="text-2xl mt-8 mb-4">Experience</h2>
