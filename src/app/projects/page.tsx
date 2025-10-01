@@ -25,10 +25,10 @@ export default function Projects() {
         <section>
           <h2 className="text-2xl font-bold mb-4">Projects</h2>
           {projects.map((project, index) => (
-            <div key={index} className="mb-8 flex gap-6">
+            <div key={index} className="mb-8 flex flex-col md:flex-row gap-6">
               {project.frontmatter.image && (
                 <div className="flex-shrink-0">
-                  <div className="relative w-64 h-48 rounded-lg overflow-hidden">
+                  <div className="relative w-full md:w-64 h-48 rounded-lg overflow-hidden">
                     <Image
                       src={project.frontmatter.image}
                       alt={project.frontmatter.title}
