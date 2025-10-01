@@ -8,14 +8,13 @@ export default function Navbar() {
           <Link 
             href="/" 
             className="text-xl font-bold"
-            style={{ color: "var(--text)" }}
           >
             Evan Livelo
           </Link>
 
           <div className="flex gap-6">
-            <Link href="/about" style={{ color: "var(--text)" }}>About</Link>
-            <Link href="/projects" style={{ color: "var(--text)" }}>Projects</Link>
+            <Link href="/about">About</Link>
+            <Link href="/projects">Projects</Link>
           </div>
         </div>
       </div>
