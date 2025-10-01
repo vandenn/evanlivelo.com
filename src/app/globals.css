@@ -23,13 +23,17 @@ body {
 }
 
 /* Global text and header styles */
-h1,
+h1 {
+  color: var(--accent);
+  font-family: var(--font-dm-serif), serif;
+}
+
 h2,
 h3,
 h4,
 h5,
 h6 {
-  color: var(--accent);
+  color: var(--text);
   font-family: var(--font-dm-serif), serif;
 }
 
