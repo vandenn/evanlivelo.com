@@ -1,8 +1,17 @@
 import Image from "next/image";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import LinkButton from "@/components/LinkButton";
 import { UserIcon, WrenchIcon, MailIcon, DocumentIcon } from "@/components/icons";
+import { getMarkdownContent } from '@/lib/markdown';
 
 export default function Home() {
+  const homeContent = getMarkdownContent('content/home/index.md');
+
+  const markdownComponents = {
+    p: ({ children }: any) => <p>{children}</p>,
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 items-center mb-12 max-sm:gap-6">
@@ -14,14 +23,16 @@ export default function Home() {
           </h1>
 
           <div className="text-base lg:text-lg leading-relaxed">
-            <p>I'm a senior machine learning consultant who builds AI systems that solve real-world problems. I lead teams that create everything from generative AI solutions to data infrastructure for enterprise clients.</p>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+              {homeContent.content}
+            </ReactMarkdown>
           </div>
         </div>
 
         <div className="flex justify-center lg:justify-end max-sm:order-first">
           <div className="relative w-40 h-40 lg:w-64 lg:h-64">
             <Image
-              src="/images/me.png"
+              src="/images/home/me.png"
               alt="Evan Livelo"
               fill
               className="rounded-full object-cover"

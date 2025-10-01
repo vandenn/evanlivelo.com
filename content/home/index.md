@@ -1,0 +1,1 @@
+I'm a senior machine learning consultant who builds AI systems that solve real-world problems. I lead teams that create everything from generative AI solutions to data infrastructure for enterprise clients.
