@@ -39,7 +39,7 @@ export default async function BlogPost({
     <>
       <article>
         <header className="mb-8">
-          <h1 className="text-5xl mb-4">{post.frontmatter.title}</h1>
+          <h1 className="mb-4">{post.frontmatter.title}</h1>
           {post.frontmatter.date && (
             <div className="text-sm text-gray-400">
               {new Date(post.frontmatter.date).toLocaleDateString('en-US', {

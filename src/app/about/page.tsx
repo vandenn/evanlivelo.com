@@ -12,7 +12,7 @@ export default function About() {
 
   return (
     <>
-      <h1 className="text-5xl">
+      <h1>
         About
       </h1>
 
@@ -32,7 +32,7 @@ export default function About() {
               </div>
             )}
             <div className="flex-1">
-              <h2 id="me" className="text-2xl mb-4">About Me</h2>
+              <h2 id="me" className="mb-4">About Me</h2>
               <div className="prose max-w-none">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {meContent.content}
@@ -43,7 +43,7 @@ export default function About() {
         </section>
 
         <section>
-          <h2 id="website" className="text-2xl mt-8 mb-4">About this Website</h2>
+          <h2 id="website" className="mt-8 mb-4">About this Website</h2>
           <div className="prose max-w-none">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {websiteContent.content}
@@ -52,7 +52,7 @@ export default function About() {
         </section>
 
         <section>
-          <h2 id="stuff" className="text-2xl mt-8 mb-4">Stuff I've Done</h2>
+          <h2 id="stuff" className="mt-8 mb-4">Stuff I've Done</h2>
           <div className="prose max-w-none">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {stuffContent.content}

@@ -27,10 +27,24 @@ body {
 h1 {
   color: var(--accent);
   font-family: var(--font-dm-serif), serif;
+  font-size: 3rem;
+  line-height: 1;
 }
 
-h2,
-h3,
+h2 {
+  color: var(--text);
+  font-family: var(--font-dm-serif), serif;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+h3 {
+  color: var(--text);
+  font-family: var(--font-dm-serif), serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 h4,
 h5,
 h6 {

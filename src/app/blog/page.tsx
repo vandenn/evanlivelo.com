@@ -6,7 +6,7 @@ export default function Blog() {
 
   return (
     <>
-      <h1 className="text-5xl">
+      <h1>
         Blog
       </h1>
 
@@ -17,7 +17,7 @@ export default function Blog() {
               href={`/blog/${post.frontmatter.year}/${post.frontmatter.month}/${post.frontmatter.day}/${post.frontmatter.slug}`}
               className="block hover:opacity-80 transition-opacity"
             >
-              <h2 className="text-2xl mb-2 hover:underline">{post.frontmatter.title}</h2>
+              <h2 className="mb-2 hover:underline">{post.frontmatter.title}</h2>
               {post.frontmatter.date && (
                 <div className="text-sm text-gray-400 mb-2">
                   {new Date(post.frontmatter.date).toLocaleDateString('en-US', {

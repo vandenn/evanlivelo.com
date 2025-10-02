@@ -9,13 +9,13 @@ export default function Projects() {
 
   return (
     <>
-      <h1 className="text-5xl leading-tight">
+      <h1 className="leading-tight">
         Projects
       </h1>
 
       <div className="space-y-8">
         <section>
-          <h2 id="side-projects" className="text-2xl mt-8 mb-4">Side Projects</h2>
+          <h2 id="side-projects" className="mt-8 mb-4">Side Projects</h2>
           {projects.map((project, index) => (
             <div key={index} className="mb-8 flex flex-col md:flex-row gap-6">
               {project.frontmatter.image && (
@@ -32,7 +32,7 @@ export default function Projects() {
               )}
               <div className="flex-1">
                 <div className="mb-2">
-                  <h3 className="text-xl">
+                  <h3>
                     {project.frontmatter.link ? (
                       <a
                         href={project.frontmatter.link}
@@ -70,11 +70,11 @@ export default function Projects() {
         </section>
 
         <section>
-          <h2 id="publications" className="text-2xl mt-8 mb-4">Publications</h2>
+          <h2 id="publications" className="mt-8 mb-4">Publications</h2>
           {publications.map((pub, index) => (
             <div key={index} className="mb-6">
               <div className="mb-2">
-                <h3 className="text-xl">
+                <h3>
                   {pub.frontmatter.link ? (
                     <a
                       href={pub.frontmatter.link}

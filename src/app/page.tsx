@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 items-center mb-12 max-sm:gap-6">
         <div className="space-y-4">
-          <h1 className="text-5xl lg:text-7xl leading-tight">
+          <h1 className="lg:text-7xl leading-tight">
             <span style={{ color: "var(--text)" }}>Hi! I'm </span>
             <span style={{ color: "var(--accent)" }}>Evan Livelo</span>
             <span style={{ color: "var(--text)" }}>.</span>
