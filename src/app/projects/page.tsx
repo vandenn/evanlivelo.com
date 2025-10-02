@@ -79,7 +79,6 @@ export default function Projects() {
                       href={pub.frontmatter.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:underline"
                     >
                       {pub.frontmatter.title}
                     </a>
@@ -87,7 +86,7 @@ export default function Projects() {
                     pub.frontmatter.title
                   )}
                 </h3>
-                <div className="text-sm text-gray-400">
+                <div className="text-sm" style={{ color: "var(--subtext)" }}>
                   {pub.frontmatter.coauthors && `with ${pub.frontmatter.coauthors} • `}
                   {pub.frontmatter.publisher}
                 </div>

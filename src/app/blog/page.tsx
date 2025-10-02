@@ -36,7 +36,7 @@ export default function Blog() {
                   <h3 style={{ color: "var(--accent)" }}>
                     {post.frontmatter.title}
                   </h3>
-                  <div className="flex items-center gap-2 mb-2 text-sm text-gray-400">
+                  <div className="flex items-center gap-2 mb-2 text-sm" style={{ color: "var(--subtext)" }}>
                     {post.frontmatter.date && (
                       <>
                         <span>
@@ -52,7 +52,7 @@ export default function Blog() {
                     <span>{readingDuration(post.content, { wordsPerMinute: 200, emoji: false })}</span>
                   </div>
                   {post.frontmatter.description && (
-                    <p className="text-gray-300">{post.frontmatter.description}</p>
+                    <p>{post.frontmatter.description}</p>
                   )}
                 </div>
               </div>

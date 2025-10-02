@@ -5,6 +5,7 @@
   --background: #dcd5c9;
   --foreground: #fffcf2;
   --text: #000000;
+  --subtext: #888888;
   --accent: #eb5e28;
 }
 
@@ -12,6 +13,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-text: var(--text);
+  --color-subtext: var(--subtext);
   --color-accent: var(--accent);
 }
 
