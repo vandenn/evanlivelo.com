@@ -26,14 +26,6 @@ export default async function BlogPost({
     notFound();
   }
 
-  const markdownComponents = {
-    ul: ({ children }: any) => <ul className="list-disc list-inside space-y-1 my-4">{children}</ul>,
-    ol: ({ children }: any) => <ol className="list-decimal list-inside space-y-1 my-4">{children}</ol>,
-    li: ({ children }: any) => <li>{children}</li>,
-    p: ({ children }: any) => <p className="my-2">{children}</p>,
-    strong: ({ children }: any) => <strong className="font-bold">{children}</strong>,
-  };
-
   return (
     <>
       <article>
@@ -50,8 +42,8 @@ export default async function BlogPost({
           )}
         </header>
 
-        <div className="max-w-none">
-          <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+        <div className="prose max-w-none">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {post.content}
           </ReactMarkdown>
         </div>

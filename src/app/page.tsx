@@ -9,10 +9,6 @@ import { getMarkdownContent } from '@/lib/markdown';
 export default function Home() {
   const homeContent = getMarkdownContent('content/home/index.md');
 
-  const markdownComponents = {
-    p: ({ children }: any) => <p>{children}</p>,
-  };
-
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 items-center mb-12 max-sm:gap-6">
@@ -23,8 +19,8 @@ export default function Home() {
             <span style={{ color: "var(--text)" }}>.</span>
           </h1>
 
-          <div className="text-base lg:text-lg leading-relaxed">
-            <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+          <div className="prose max-w-none text-base lg:text-lg leading-relaxed">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {homeContent.content}
             </ReactMarkdown>
           </div>

@@ -7,14 +7,6 @@ export default function Projects() {
   const projects = getProjectFiles();
   const publications = getPublicationFiles();
 
-  const markdownComponents = {
-    ul: ({ children }: any) => <ul className="list-disc list-inside space-y-1 my-4">{children}</ul>,
-    ol: ({ children }: any) => <ol className="list-decimal list-inside space-y-1 my-4">{children}</ol>,
-    li: ({ children }: any) => <li>{children}</li>,
-    p: ({ children }: any) => <p className="my-2">{children}</p>,
-    strong: ({ children }: any) => <strong className="font-bold">{children}</strong>,
-  };
-
   return (
     <>
       <h1 className="text-5xl leading-tight">
@@ -67,9 +59,11 @@ export default function Projects() {
                     </div>
                   )}
                 </div>
-                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-                  {project.content}
-                </ReactMarkdown>
+                <div className="prose max-w-none">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {project.content}
+                  </ReactMarkdown>
+                </div>
               </div>
             </div>
           ))}
@@ -99,9 +93,11 @@ export default function Projects() {
                   {pub.frontmatter.publisher}
                 </div>
               </div>
-              <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-                {pub.content}
-              </ReactMarkdown>
+              <div className="prose max-w-none">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {pub.content}
+                </ReactMarkdown>
+              </div>
             </div>
           ))}
         </section>
