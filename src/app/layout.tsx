@@ -1,18 +1,43 @@
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { DM_Serif_Text, Roboto } from "next/font/google";
+import localFont from "next/font/local";
 import type { Metadata } from "next";
 
-const dmSerifText = DM_Serif_Text({
-  weight: "400",
-  subsets: ["latin"],
+const dmSerifText = localFont({
+  src: [
+    {
+      path: "../../public/fonts/DMSerifText-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/DMSerifText-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+  ],
   variable: "--font-dm-serif",
 });
 
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
+const roboto = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Roboto-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Roboto-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../../public/fonts/Roboto-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   variable: "--font-roboto",
 });
 

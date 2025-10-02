@@ -11,11 +11,18 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
+  const dmSerifFont = fetch(
+    new URL("../../public/fonts/DMSerifText-Regular.ttf", import.meta.url)
+  ).then((res) => res.arrayBuffer());
+
+  const robotoFont = fetch(
+    new URL("../../public/fonts/Roboto-Regular.ttf", import.meta.url)
+  ).then((res) => res.arrayBuffer());
+
   return new ImageResponse(
     (
       <div
         style={{
-          fontSize: 128,
           background: "#dcd5c9",
           width: "100%",
           height: "100%",
@@ -23,19 +30,51 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: "serif",
+          padding: 60,
         }}
       >
-        <div style={{
-          fontSize: 72,
-          color: "#000000",
-          marginBottom: 20,
-        }}>
-          Hi! I'm <span style={{ color: "#eb5e28" }}>Evan Livelo</span>.
+        <div
+          style={{
+            background: "#fffcf2",
+            borderRadius: 16,
+            padding: 80,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <div style={{
+            fontSize: 96,
+            color: "#000000",
+            marginBottom: 20,
+            display: "flex",
+            fontWeight: 400,
+            fontFamily: "DM Serif Text",
+          }}>
+            <span>Hi! I&apos;m&nbsp;</span>
+            <span style={{ color: "#eb5e28" }}>Evan Livelo</span>
+            <span>.</span>
+          </div>
+          <div style={{
+            fontSize: 32,
+            color: "#000000",
+            display: "flex",
+            fontWeight: 400,
+            fontFamily: "Roboto",
+          }}>
+            ML, Data, GenAI, Engineering
+          </div>
         </div>
         <div style={{
           fontSize: 32,
           color: "#000000",
+          marginTop: 30,
+          display: "flex",
+          fontWeight: 400,
+          fontFamily: "Roboto",
+          textDecoration: "underline",
         }}>
           evanlivelo.com
         </div>
@@ -43,6 +82,20 @@ export default async function Image() {
     ),
     {
       ...size,
+      fonts: [
+        {
+          name: "DM Serif Text",
+          data: await dmSerifFont,
+          style: "normal",
+          weight: 400,
+        },
+        {
+          name: "Roboto",
+          data: await robotoFont,
+          style: "normal",
+          weight: 400,
+        },
+      ],
     }
   );
 }
