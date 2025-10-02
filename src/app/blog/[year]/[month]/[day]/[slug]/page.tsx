@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getBlogPost, getBlogFiles } from '@/lib/markdown';
@@ -26,6 +27,14 @@ export default async function BlogPost({
     notFound();
   }
 
+  const markdownComponents = {
+    img: ({ src, alt }: any) => (
+      <span className="flex justify-center my-4">
+        <img src={src} alt={alt || ''} className="max-w-full h-auto" />
+      </span>
+    ),
+  };
+
   return (
     <>
       <article>
@@ -43,7 +52,7 @@ export default async function BlogPost({
         </header>
 
         <div className="prose max-w-none">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
             {post.content}
           </ReactMarkdown>
         </div>

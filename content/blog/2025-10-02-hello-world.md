@@ -23,8 +23,7 @@ cat README.md
 - I'll be able to share my thoughts and ideas about different topics I encounter in my day-to-day, both work and non-work; and
 - I'll have a place to put down project notes that don't quite fit in `README`s, like learnings, struggles, and realizations
 
-![](/images/blog/2025-10-02-hello-world/diagram.png)
-_Here's a random diagram to test displaying images._
+![Diagram](/images/blog/2025-10-02-hello-world/diagram.png)
 
 ## Cheers!
 
