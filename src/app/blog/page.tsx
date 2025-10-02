@@ -17,7 +17,7 @@ export default function Blog() {
           <article key={index} className="mb-8">
             <Link
               href={`/blog/${post.frontmatter.year}/${post.frontmatter.month}/${post.frontmatter.day}/${post.frontmatter.slug}`}
-              className="block hover:opacity-80 transition-opacity"
+              className="block"
             >
               <div className="flex flex-col md:flex-row gap-6">
                 {post.frontmatter['og-img'] && (
@@ -33,7 +33,9 @@ export default function Blog() {
                   </div>
                 )}
                 <div className="flex-1">
-                  <h2 className="mb-2 hover:underline">{post.frontmatter.title}</h2>
+                  <h3 style={{ color: "var(--accent)" }}>
+                    {post.frontmatter.title}
+                  </h3>
                   <div className="flex items-center gap-2 mb-2 text-sm text-gray-400">
                     {post.frontmatter.date && (
                       <>

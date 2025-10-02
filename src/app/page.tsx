@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import LinkButton from "@/components/LinkButton";
@@ -15,7 +16,13 @@ export default function Home() {
         <div className="space-y-4">
           <h1 className="lg:text-7xl leading-tight">
             <span style={{ color: "var(--text)" }}>Hi! I'm </span>
-            <span style={{ color: "var(--accent)" }}>Evan Livelo</span>
+            <Link
+              target="_blank"
+              href="https://drive.google.com/file/d/1lVXxnXQq8VAEACIecbdmW-O1AFSAf2e0/view?usp=sharing"
+              style={{ color: "var(--accent)" }}
+            >
+              Evan Livelo
+            </Link>
             <span style={{ color: "var(--text)" }}>.</span>
           </h1>
 
@@ -30,19 +37,16 @@ export default function Home() {
               href="mailto:evan.livelo@gmail.com"
               ariaLabel="Email"
               icon={<SocialsMailIcon />}
-              className="hover:opacity-70 transition-opacity"
             />
             <SocialIconButton
               href="https://github.com/vandenn"
               ariaLabel="GitHub"
               icon={<GitHubIcon />}
-              className="hover:opacity-70 transition-opacity"
             />
             <SocialIconButton
               href="https://linkedin.com/in/evanlivelo"
               ariaLabel="LinkedIn"
               icon={<LinkedInIcon />}
-              className="hover:opacity-70 transition-opacity"
             />
           </div>
         </div>

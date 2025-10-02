@@ -62,19 +62,19 @@ export default async function BlogPost({
                 href="mailto:evan.livelo@gmail.com"
                 ariaLabel="Email"
                 icon={<SocialsMailIcon />}
-                className="hover:opacity-70 transition-opacity w-5 h-5 flex items-center"
+                className="w-5 h-5 flex items-center"
               />
               <SocialIconButton
                 href="https://github.com/vandenn"
                 ariaLabel="GitHub"
                 icon={<GitHubIcon />}
-                className="hover:opacity-70 transition-opacity w-5 h-5 flex items-center"
+                className="w-5 h-5 flex items-center"
               />
               <SocialIconButton
                 href="https://linkedin.com/in/evanlivelo"
                 ariaLabel="LinkedIn"
                 icon={<LinkedInIcon />}
-                className="hover:opacity-70 transition-opacity w-5 h-5 flex items-center"
+                className="w-5 h-5 flex items-center"
               />
             </span>
           </div>

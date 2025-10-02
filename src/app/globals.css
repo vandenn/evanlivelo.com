@@ -25,7 +25,7 @@ body {
 
 /* Global text and header styles */
 h1 {
-  color: var(--accent);
+  color: var(--text);
   font-family: var(--font-dm-serif), serif;
   font-size: 3rem;
   line-height: 1;

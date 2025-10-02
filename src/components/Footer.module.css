@@ -2,6 +2,7 @@
   font-family: var(--font-dm-serif), serif;
   font-size: 1.125rem;
   font-weight: bold;
+  color: var(--text);
 }
 
 .footerEmail {
@@ -9,6 +10,7 @@
   margin: 0;
   display: block;
   color: var(--text);
+  text-decoration: underline;
 }
 
 .footerIcon {

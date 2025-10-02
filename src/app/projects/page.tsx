@@ -38,7 +38,6 @@ export default function Projects() {
                         href={project.frontmatter.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:underline"
                       >
                         {project.frontmatter.title}
                       </a>
