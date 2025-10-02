@@ -23,7 +23,7 @@ export default async function Image() {
     (
       <div
         style={{
-          background: "#dcd5c9",
+          background: "#ece5d9",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -47,19 +47,19 @@ export default async function Image() {
         >
           <div style={{
             fontSize: 96,
-            color: "#000000",
+            color: "#293241",
             marginBottom: 20,
             display: "flex",
             fontWeight: 400,
             fontFamily: "DM Serif Text",
           }}>
             <span>Hi! I&apos;m&nbsp;</span>
-            <span style={{ color: "#eb5e28" }}>Evan Livelo</span>
+            <span style={{ color: "#1982c4" }}>Evan Livelo</span>
             <span>.</span>
           </div>
           <div style={{
             fontSize: 32,
-            color: "#000000",
+            color: "#293241",
             display: "flex",
             fontWeight: 400,
             fontFamily: "Roboto",
@@ -69,7 +69,7 @@ export default async function Image() {
         </div>
         <div style={{
           fontSize: 32,
-          color: "#000000",
+          color: "#293241",
           marginTop: 30,
           display: "flex",
           fontWeight: 400,

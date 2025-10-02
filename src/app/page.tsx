@@ -58,6 +58,8 @@ export default function Home() {
               alt="Evan Livelo"
               fill
               className="rounded-full object-cover"
+              sizes="(max-width: 1024px) 160px, 256px"
+              quality={90}
               priority
             />
           </div>

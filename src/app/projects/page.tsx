@@ -45,6 +45,8 @@ export default function Projects() {
                       alt={project.frontmatter.title}
                       fill
                       className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 256px"
+                      quality={90}
                     />
                   </div>
                 </div>

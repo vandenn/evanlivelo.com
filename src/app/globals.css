@@ -2,11 +2,11 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #dcd5c9;
+  --background: #ece5d9;
   --foreground: #fffcf2;
-  --text: #000000;
+  --text: #293241;
   --subtext: #888888;
-  --accent: #eb5e28;
+  --accent: #1982c4;
 }
 
 @theme inline {
