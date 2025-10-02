@@ -19,7 +19,7 @@ export default function About() {
 
   return (
     <>
-      <h1 className="text-3xl mb-6">
+      <h1 className="text-5xl leading-tight">
         About
       </h1>
 
