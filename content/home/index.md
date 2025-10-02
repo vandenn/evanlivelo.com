@@ -1,1 +1,1 @@
-I'm a senior machine learning consultant who builds AI systems that solve real-world problems. I lead teams that create everything from generative AI solutions to data infrastructure for enterprise clients.
+Senior ML consultant, engineer, and GenAI technical leader who builds AI systems from research to production. Board game enthusiast and aspiring polyglot.

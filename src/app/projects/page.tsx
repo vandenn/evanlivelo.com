@@ -23,6 +23,7 @@ export default function Projects() {
 
       <div className="space-y-8">
         <section>
+          <h2 id="side-projects" className="text-2xl mt-8 mb-4">Side Projects</h2>
           {projects.map((project, index) => (
             <div key={index} className="mb-8 flex flex-col md:flex-row gap-6">
               {project.frontmatter.image && (
@@ -75,7 +76,7 @@ export default function Projects() {
         </section>
 
         <section>
-          <h2 className="text-2xl mt-8 mb-4">Publications</h2>
+          <h2 id="publications" className="text-2xl mt-8 mb-4">Publications</h2>
           {publications.map((pub, index) => (
             <div key={index} className="mb-6">
               <div className="mb-2">
