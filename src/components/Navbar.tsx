@@ -16,6 +16,7 @@ export default function Navbar() {
           <div className="flex gap-6">
             <Link href="/about" className={styles.navLink}>About</Link>
             <Link href="/projects" className={styles.navLink}>Projects</Link>
+            <Link href="/blog" className={styles.navLink}>Blog</Link>
           </div>
         </div>
       </div>
