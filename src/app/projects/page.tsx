@@ -50,7 +50,7 @@ export default function Projects() {
                       {project.frontmatter.tech.map((tech: string, techIndex: number) => (
                         <span
                           key={techIndex}
-                          className="text-xs px-2 py-1 bg-gray-200 rounded-md"
+                          className="text-xs px-2 py-1 bg-white rounded-md"
                         >
                           {tech}
                         </span>
