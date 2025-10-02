@@ -47,6 +47,32 @@ export const sharedMetadata = {
   locale: "en_US",
   type: "website" as const,
   description: "Senior ML consultant, engineer, and GenAI technical leader who builds AI systems from research to production. Board game enthusiast and aspiring polyglot.",
+  keywords: [
+    "Evan Livelo",
+    "machine learning consultant",
+    "ML engineer",
+    "data engineer",
+    "AI engineer",
+    "AI researcher",
+    "cloud engineer",
+    "software developer",
+    "natural language processing",
+    "NLP",
+    "computer vision",
+    "generative AI",
+    "GenAI",
+    "LLM engineer",
+    "RAG system",
+    "retrieval augmented generation",
+    "AI evals",
+    "Python developer",
+    "Thinking Machines",
+    "OpenAI partner",
+    "GCP architect",
+    "De La Salle University",
+    "ML portfolio",
+    "GenAI portfolio",
+  ],
 };
 
 export const metadata: Metadata = {
@@ -55,7 +81,7 @@ export const metadata: Metadata = {
     template: "%s | Evan Livelo"
   },
   description: sharedMetadata.description,
-  keywords: ["Evan Livelo", "software engineer", "developer", "portfolio", "blog"],
+  keywords: sharedMetadata.keywords,
   authors: [{ name: "Evan Livelo" }],
   creator: "Evan Livelo",
   openGraph: {

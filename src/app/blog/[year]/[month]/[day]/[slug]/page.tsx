@@ -8,6 +8,7 @@ import SocialIconButton from '@/components/SocialIconButton';
 import { GitHubIcon, LinkedInIcon, SocialsMailIcon } from '@/components/icons';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { sharedMetadata } from '@/app/layout';
 
 export async function generateStaticParams() {
   const posts = getBlogFiles();
@@ -34,14 +35,19 @@ export async function generateMetadata({
     };
   }
 
-  const { title, description, date } = post.frontmatter;
+  const { title, description, date, tags } = post.frontmatter;
   const ogImage = post.frontmatter['og-img'];
   const url = `https://evanlivelo.com/blog/${year}/${month}/${day}/${slug}`;
   const absoluteImageUrl = ogImage?.startsWith('http') ? ogImage : `https://evanlivelo.com${ogImage}`;
 
+  // Combine default keywords with post-specific tags
+  const postTags = Array.isArray(tags) ? tags : [];
+  const allKeywords = [...sharedMetadata.keywords, ...postTags];
+
   return {
     title,
     description: description || title,
+    keywords: allKeywords,
     openGraph: {
       title,
       description: description || title,
