@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { getBlogFiles } from '@/lib/markdown';
 
@@ -10,26 +11,42 @@ export default function Blog() {
         Blog
       </h1>
 
-      <div className="space-y-6 mt-8">
+      <div className="space-y-8 mt-8">
         {posts.map((post, index) => (
-          <article key={index} className="mb-6">
+          <article key={index} className="mb-8">
             <Link
               href={`/blog/${post.frontmatter.year}/${post.frontmatter.month}/${post.frontmatter.day}/${post.frontmatter.slug}`}
               className="block hover:opacity-80 transition-opacity"
             >
-              <h2 className="mb-2 hover:underline">{post.frontmatter.title}</h2>
-              {post.frontmatter.date && (
-                <div className="text-sm text-gray-400 mb-2">
-                  {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
+              <div className="flex flex-col md:flex-row gap-6">
+                {post.frontmatter['og-img'] && (
+                  <div className="flex-shrink-0">
+                    <div className="relative w-full md:w-64 h-48 rounded-lg overflow-hidden">
+                      <Image
+                        src={post.frontmatter['og-img']}
+                        alt={post.frontmatter.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                )}
+                <div className="flex-1">
+                  <h2 className="mb-2 hover:underline">{post.frontmatter.title}</h2>
+                  {post.frontmatter.date && (
+                    <div className="text-sm text-gray-400 mb-2">
+                      {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </div>
+                  )}
+                  {post.frontmatter.description && (
+                    <p className="text-gray-300">{post.frontmatter.description}</p>
+                  )}
                 </div>
-              )}
-              {post.frontmatter.description && (
-                <p className="text-gray-300">{post.frontmatter.description}</p>
-              )}
+              </div>
             </Link>
           </article>
         ))}
