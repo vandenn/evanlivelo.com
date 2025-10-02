@@ -4,13 +4,20 @@
 
 ![node](https://img.shields.io/badge/node.js-20+-green)
 
-Welcome to my personal website!
+Welcome to my personal website! For this iteration, I implemented the website in Next.js with Tailwind CSS.
 
 </div>
 
 # Setup
 
-Run the development server:
+`cd` into your local copy of the repository and install dependencies:
+
+```bash
+cd evanlivelo.com
+npm install
+```
+
+Then run the development server:
 
 ```bash
 npm run dev
