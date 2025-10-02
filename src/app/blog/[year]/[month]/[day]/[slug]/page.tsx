@@ -1,7 +1,9 @@
-import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import readingDuration from 'reading-duration';
 import { getBlogPost, getBlogFiles } from '@/lib/markdown';
+import SocialIconButton from '@/components/SocialIconButton';
+import { GitHubIcon, LinkedInIcon, SocialsMailIcon } from '@/components/icons';
 import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
@@ -40,15 +42,42 @@ export default async function BlogPost({
       <article>
         <header className="mb-8">
           <h1 className="mb-4">{post.frontmatter.title}</h1>
-          {post.frontmatter.date && (
-            <div className="text-sm text-gray-400">
-              {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </div>
-          )}
+          <div className="flex items-center gap-2 text-sm">
+            {post.frontmatter.date && (
+              <>
+                <span>
+                  {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </span>
+                <span>/</span>
+              </>
+            )}
+            <span>{readingDuration(post.content, { wordsPerMinute: 200, emoji: false })}</span>
+            <span>/</span>
+            <span className="flex items-center gap-2">
+              <SocialIconButton
+                href="mailto:evan.livelo@gmail.com"
+                ariaLabel="Email"
+                icon={<SocialsMailIcon />}
+                className="hover:opacity-70 transition-opacity w-5 h-5 flex items-center"
+              />
+              <SocialIconButton
+                href="https://github.com/vandenn"
+                ariaLabel="GitHub"
+                icon={<GitHubIcon />}
+                className="hover:opacity-70 transition-opacity w-5 h-5 flex items-center"
+              />
+              <SocialIconButton
+                href="https://linkedin.com/in/evanlivelo"
+                ariaLabel="LinkedIn"
+                icon={<LinkedInIcon />}
+                className="hover:opacity-70 transition-opacity w-5 h-5 flex items-center"
+              />
+            </span>
+          </div>
         </header>
 
         <div className="prose max-w-none">

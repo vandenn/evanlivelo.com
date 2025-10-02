@@ -1,3 +1,4 @@
+import readingDuration from 'reading-duration';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getBlogFiles } from '@/lib/markdown';
@@ -33,15 +34,21 @@ export default function Blog() {
                 )}
                 <div className="flex-1">
                   <h2 className="mb-2 hover:underline">{post.frontmatter.title}</h2>
-                  {post.frontmatter.date && (
-                    <div className="text-sm text-gray-400 mb-2">
-                      {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </div>
-                  )}
+                  <div className="flex items-center gap-2 mb-2 text-sm text-gray-400">
+                    {post.frontmatter.date && (
+                      <>
+                        <span>
+                          {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                          })}
+                        </span>
+                        <span>/</span>
+                      </>
+                    )}
+                    <span>{readingDuration(post.content, { wordsPerMinute: 200, emoji: false })}</span>
+                  </div>
                   {post.frontmatter.description && (
                     <p className="text-gray-300">{post.frontmatter.description}</p>
                   )}
