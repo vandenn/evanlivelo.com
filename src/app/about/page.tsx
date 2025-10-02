@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import LinkButton from '@/components/LinkButton';
@@ -19,16 +20,32 @@ export default function About() {
 
   return (
     <>
-      <h1 className="text-5xl leading-tight">
+      <h1 className="text-5xl">
         About
       </h1>
 
-      <div className="space-y-8">
+      <div className="space-y-8 mt-8">
         <section>
-          <h2 id="me" className="text-2xl mt-8 mb-4">About Me</h2>
-          <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-            {meContent.content}
-          </ReactMarkdown>
+          <div className="flex flex-col md:flex-row md:items-center gap-6">
+            {meContent.frontmatter.image && (
+              <div className="flex-shrink-0">
+                <div className="relative w-full md:w-48 h-48 rounded-lg overflow-hidden">
+                  <Image
+                    src={meContent.frontmatter.image}
+                    alt="About Me"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            )}
+            <div className="flex-1">
+              <h2 id="me" className="text-2xl mb-4">About Me</h2>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+                {meContent.content}
+              </ReactMarkdown>
+            </div>
+          </div>
         </section>
 
         <section>
