@@ -27,4 +27,4 @@ cat README.md
 
 ## Cheers!
 
-See you in my [future blog posts](/blog)!
+That's it for this mini blog post. I'm not really sure yet what cadence I'll be able to write, but I hope to release more soon. See you in my [future blog posts](/blog)!
