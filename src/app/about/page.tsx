@@ -6,9 +6,9 @@ import { MailIcon, DocumentIcon } from '@/components/icons';
 import { getMarkdownContent } from '@/lib/markdown';
 
 export default function About() {
-  const meContent = getMarkdownContent('content/about/me/index.md');
-  const websiteContent = getMarkdownContent('content/about/website/index.md');
-  const stuffContent = getMarkdownContent('content/about/stuff/index.md');
+  const meContent = getMarkdownContent('content/about/me.md');
+  const websiteContent = getMarkdownContent('content/about/website.md');
+  const stuffContent = getMarkdownContent('content/about/stuff.md');
 
   const markdownComponents = {
     ul: ({ children }: any) => <ul className="list-disc list-inside space-y-1 my-4">{children}</ul>,

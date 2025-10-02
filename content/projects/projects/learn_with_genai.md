@@ -8,7 +8,7 @@ tech:
   - LangChain/LangGraph
   - FastAPI
 link: "https://github.com/vandenn/learn-with-genai"
-image: "./learn_with_genai.png"
+image: "/images/projects/projects/learn_with_genai/learn_with_genai.png"
 ---
 
 An open-source GenAI-powered learning application that helps you learn faster through AI-powered note-taking, RAG-based question answering, and pedagogical agents for reviewing. It's like Cursor for learning, or an open-source NotebookLM.
