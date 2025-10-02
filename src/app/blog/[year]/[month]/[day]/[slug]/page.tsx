@@ -5,6 +5,7 @@ import { getBlogPost, getBlogFiles } from '@/lib/markdown';
 import SocialIconButton from '@/components/SocialIconButton';
 import { GitHubIcon, LinkedInIcon, SocialsMailIcon } from '@/components/icons';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 
 export async function generateStaticParams() {
   const posts = getBlogFiles();
@@ -15,6 +16,45 @@ export async function generateStaticParams() {
     day: post.frontmatter.day,
     slug: post.frontmatter.slug,
   }));
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ year: string; month: string; day: string; slug: string }>
+}): Promise<Metadata> {
+  const { year, month, day, slug } = await params;
+  const post = getBlogPost(year, month, day, slug);
+
+  if (!post) {
+    return {
+      title: "Not Found",
+    };
+  }
+
+  const { title, description, date } = post.frontmatter;
+  const ogImage = post.frontmatter['og-img'];
+  const url = `https://evanlivelo.com/blog/${year}/${month}/${day}/${slug}`;
+  const absoluteImageUrl = ogImage?.startsWith('http') ? ogImage : `https://evanlivelo.com${ogImage}`;
+
+  return {
+    title,
+    description: description || title,
+    openGraph: {
+      title,
+      description: description || title,
+      type: "article",
+      publishedTime: date,
+      url,
+      ...(ogImage && { images: [{ url: absoluteImageUrl }] }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: description || title,
+      ...(ogImage && { images: [absoluteImageUrl] }),
+    },
+  };
 }
 
 export default async function BlogPost({

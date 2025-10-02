@@ -2,6 +2,25 @@ import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getProjectFiles, getPublicationFiles } from '@/lib/markdown';
+import type { Metadata } from 'next';
+import { sharedMetadata } from '../layout';
+
+export const metadata: Metadata = {
+  title: "Projects",
+  openGraph: {
+    title: "Projects | Evan Livelo",
+    description: sharedMetadata.description,
+    url: `${sharedMetadata.siteUrl}/projects`,
+    siteName: sharedMetadata.siteName,
+    locale: sharedMetadata.locale,
+    type: sharedMetadata.type,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Projects | Evan Livelo",
+    description: sharedMetadata.description,
+  },
+};
 
 export default function Projects() {
   const projects = getProjectFiles();

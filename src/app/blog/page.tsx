@@ -2,6 +2,25 @@ import readingDuration from 'reading-duration';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getBlogFiles } from '@/lib/markdown';
+import type { Metadata } from 'next';
+import { sharedMetadata } from '../layout';
+
+export const metadata: Metadata = {
+  title: "Blog",
+  openGraph: {
+    title: "Blog | Evan Livelo",
+    description: sharedMetadata.description,
+    url: `${sharedMetadata.siteUrl}/blog`,
+    siteName: sharedMetadata.siteName,
+    locale: sharedMetadata.locale,
+    type: sharedMetadata.type,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Evan Livelo",
+    description: sharedMetadata.description,
+  },
+};
 
 export default function Blog() {
   const posts = getBlogFiles();

@@ -4,6 +4,25 @@ import remarkGfm from 'remark-gfm';
 import LinkButton from '@/components/LinkButton';
 import { MailIcon, DocumentIcon } from '@/components/icons';
 import { getMarkdownContent } from '@/lib/markdown';
+import type { Metadata } from 'next';
+import { sharedMetadata } from '../layout';
+
+export const metadata: Metadata = {
+  title: "About",
+  openGraph: {
+    title: "About | Evan Livelo",
+    description: sharedMetadata.description,
+    url: `${sharedMetadata.siteUrl}/about`,
+    siteName: sharedMetadata.siteName,
+    locale: sharedMetadata.locale,
+    type: sharedMetadata.type,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About | Evan Livelo",
+    description: sharedMetadata.description,
+  },
+};
 
 export default function About() {
   const meContent = getMarkdownContent('content/about/me.md');

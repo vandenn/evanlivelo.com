@@ -2,7 +2,7 @@
 title: Hello World!
 description: My first blog post on my personal website, but also just a test page to see if the Markdown features work.
 date: 2025-10-02
-og-img: "/images/blog/2025-10-02-hello-world/og.png"
+og-img: "/images/blog/2025-10-02-hello-world/opengraph-image.png"
 ---
 
 ## Welcome!
