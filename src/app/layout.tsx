@@ -1,9 +1,9 @@
 import "./globals.css";
+import ClarityAnalytics from "../components/clarity";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import localFont from "next/font/local";
 import type { Metadata } from "next";
-import Clarity from "@microsoft/clarity";
 
 const dmSerifText = localFont({
   src: [
@@ -109,13 +109,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  if (process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID) {
-    Clarity.init(process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID);
-  }
-
   return (
     <html lang="en">
       <body className={`antialiased ${dmSerifText.variable} ${roboto.variable}`}>
+        <ClarityAnalytics />
         <Navbar />
         <div className="w-full flex flex-col">
           <div className="w-4/5 max-w-5xl mx-auto bg-[var(--foreground)] rounded-lg shadow-lg p-8 max-sm:w-[calc(100%-2rem)] max-sm:mx-4">

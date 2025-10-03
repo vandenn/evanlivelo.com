@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getProjectFiles, getPublicationFiles, getMarkdownContent } from '@/lib/markdown';
@@ -49,62 +48,44 @@ export default function Projects() {
             </ReactMarkdown>
           </div>
           {projects.map((project, index) => (
-            <div key={index} className="mb-8 flex flex-col md:flex-row gap-6">
-              {project.frontmatter.image && (
-                <div className="flex-shrink-0">
-                  <div className="relative w-full md:w-64 h-48 rounded-lg overflow-hidden">
-                    <Image
-                      src={project.frontmatter.image}
-                      alt={project.frontmatter.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 256px"
-                      quality={90}
-                    />
-                  </div>
-                </div>
-              )}
-              <div className="flex-1">
-                <div className="mb-2">
-                  <h3>
-                    {project.frontmatter.link ? (
-                      <a
-                        href={project.frontmatter.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {project.frontmatter.title}
-                      </a>
-                    ) : (
-                      project.frontmatter.title
+            <div key={index} className="mb-8">
+              <h3>
+                {project.frontmatter.link ? (
+                  <a
+                    href={project.frontmatter.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {project.frontmatter.title}
+                  </a>
+                ) : (
+                  project.frontmatter.title
+                )}
+              </h3>
+              <div className="flex flex-wrap gap-2 mt-2 items-center">
+                {project.frontmatter.date && (
+                  <>
+                    <span className="text-sm" style={{ color: "var(--subtext)" }}>
+                      {project.frontmatter.date.split('-')[0]}
+                    </span>
+                    {project.frontmatter.tech && (
+                      <span className="text-sm" style={{ color: "var(--subtext)" }}>/</span>
                     )}
-                  </h3>
-                  <div className="flex flex-wrap gap-2 mt-2 items-center">
-                    {project.frontmatter.date && (
-                      <>
-                        <span className="text-sm" style={{ color: "var(--subtext)" }}>
-                          {project.frontmatter.date.split('-')[0]}
-                        </span>
-                        {project.frontmatter.tech && (
-                          <span className="text-sm" style={{ color: "var(--subtext)" }}>/</span>
-                        )}
-                      </>
-                    )}
-                    {project.frontmatter.tech && project.frontmatter.tech.map((tech: string, techIndex: number) => (
-                      <span
-                        key={techIndex}
-                        className="text-xs px-2 py-1 bg-white rounded-md"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="prose max-w-none">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {project.content}
-                  </ReactMarkdown>
-                </div>
+                  </>
+                )}
+                {project.frontmatter.tech && project.frontmatter.tech.map((tech: string, techIndex: number) => (
+                  <span
+                    key={techIndex}
+                    className="text-xs px-2 py-1 bg-white rounded-md"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div className="prose max-w-none mt-2">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {project.content}
+                </ReactMarkdown>
               </div>
             </div>
           ))}
