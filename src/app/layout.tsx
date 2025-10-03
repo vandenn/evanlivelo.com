@@ -47,7 +47,7 @@ export const sharedMetadata = {
   siteUrl: "https://evanlivelo.com",
   locale: "en_US",
   type: "website" as const,
-  description: "Senior ML consultant, engineer, and GenAI technical leader who builds AI systems from research to production. Board game enthusiast and aspiring polyglot.",
+  description: "Senior ML consultant, engineer, and GenAI technical lead who builds AI systems from research to production. Board game enthusiast and aspiring polyglot.",
   keywords: [
     "Evan Livelo",
     "machine learning consultant",
