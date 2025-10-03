@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import localFont from "next/font/local";
 import type { Metadata } from "next";
+import Clarity from "@microsoft/clarity";
 
 const dmSerifText = localFont({
   src: [
@@ -108,6 +109,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID) {
+    Clarity.init(process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID);
+  }
+
   return (
     <html lang="en">
       <body className={`antialiased ${dmSerifText.variable} ${roboto.variable}`}>

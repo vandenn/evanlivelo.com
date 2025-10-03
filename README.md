@@ -22,3 +22,11 @@ Then run the development server:
 ```bash
 npm run dev
 ```
+
+## Optional: Clarity
+
+This website integrates with [Microsoft's hosted Clarity solution](https://clarity.microsoft.com). To set that up in this repo, you'll need to have your Clarity project ID added to an `.env.local` file:
+
+```bash
+cp -i .env.example .env.local
+```
