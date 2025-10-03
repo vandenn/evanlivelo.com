@@ -1,0 +1,1 @@
+_I decided to put here all the projects I pursued that have taken at least some form of MVP shape. For other projects or experiments that I tinker with that don't end up in a somewhat complete or usable state, I may just make a [blog post](/blog) about them._

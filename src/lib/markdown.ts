@@ -20,7 +20,7 @@ export function getMarkdownContent(filePath: string): MarkdownFile {
 
 export function getProjectFiles(): MarkdownFile[] {
   const projectsDir = path.join(process.cwd(), 'content/projects/projects');
-  const files = fs.readdirSync(projectsDir).filter(file => file.endsWith('.md'));
+  const files = fs.readdirSync(projectsDir).filter(file => file.endsWith('.md') && file !== 'index.md');
 
   const projectList = files.map(file => {
     const filePath = path.join(projectsDir, file);
@@ -39,7 +39,7 @@ export function getProjectFiles(): MarkdownFile[] {
 
 export function getPublicationFiles(): MarkdownFile[] {
   const publicationsDir = path.join(process.cwd(), 'content/projects/publications');
-  const files = fs.readdirSync(publicationsDir).filter(file => file.endsWith('.md'));
+  const files = fs.readdirSync(publicationsDir).filter(file => file.endsWith('.md') && file !== 'index.md');
 
   const publicationList = files.map(file => {
     const filePath = path.join(publicationsDir, file);
@@ -58,7 +58,7 @@ export function getPublicationFiles(): MarkdownFile[] {
 
 export function getBlogFiles(): MarkdownFile[] {
   const blogDir = path.join(process.cwd(), 'content/blog');
-  const files = fs.readdirSync(blogDir).filter(file => file.endsWith('.md'));
+  const files = fs.readdirSync(blogDir).filter(file => file.endsWith('.md') && file !== 'index.md');
 
   const blogList = files.map(file => {
     const filePath = path.join(blogDir, file);

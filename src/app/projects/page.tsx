@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { getProjectFiles, getPublicationFiles } from '@/lib/markdown';
+import { getProjectFiles, getPublicationFiles, getMarkdownContent } from '@/lib/markdown';
 import type { Metadata } from 'next';
 import { sharedMetadata } from '../layout';
 
@@ -25,16 +25,29 @@ export const metadata: Metadata = {
 export default function Projects() {
   const projects = getProjectFiles();
   const publications = getPublicationFiles();
+  const projectsIntro = getMarkdownContent("content/projects/index.md");
+  const publicationsIntro = getMarkdownContent("content/projects/publications/index.md");
+  const sideProjectsIntro = getMarkdownContent("content/projects/projects/index.md");
 
   return (
     <>
-      <h1 className="leading-tight">
+      <h1>
         Projects
       </h1>
+      <div className="mt-4 prose max-w-none">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {projectsIntro.content}
+        </ReactMarkdown>
+      </div>
 
       <div className="space-y-8">
         <section>
           <h2 id="side-projects" className="mt-8 mb-4">Side Projects</h2>
+          <div className="mb-4 prose max-w-none">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {sideProjectsIntro.content}
+            </ReactMarkdown>
+          </div>
           {projects.map((project, index) => (
             <div key={index} className="mb-8 flex flex-col md:flex-row gap-6">
               {project.frontmatter.image && (
@@ -66,18 +79,26 @@ export default function Projects() {
                       project.frontmatter.title
                     )}
                   </h3>
-                  {project.frontmatter.tech && (
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {project.frontmatter.tech.map((tech: string, techIndex: number) => (
-                        <span
-                          key={techIndex}
-                          className="text-xs px-2 py-1 bg-white rounded-md"
-                        >
-                          {tech}
+                  <div className="flex flex-wrap gap-2 mt-2 items-center">
+                    {project.frontmatter.date && (
+                      <>
+                        <span className="text-sm" style={{ color: "var(--subtext)" }}>
+                          {project.frontmatter.date.split('-')[0]}
                         </span>
-                      ))}
-                    </div>
-                  )}
+                        {project.frontmatter.tech && (
+                          <span className="text-sm" style={{ color: "var(--subtext)" }}>/</span>
+                        )}
+                      </>
+                    )}
+                    {project.frontmatter.tech && project.frontmatter.tech.map((tech: string, techIndex: number) => (
+                      <span
+                        key={techIndex}
+                        className="text-xs px-2 py-1 bg-white rounded-md"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
                 <div className="prose max-w-none">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -91,6 +112,11 @@ export default function Projects() {
 
         <section>
           <h2 id="publications" className="mt-8 mb-4">Publications</h2>
+          <div className="mb-4 prose max-w-none">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {publicationsIntro.content}
+            </ReactMarkdown>
+          </div>
           {publications.map((pub, index) => (
             <div key={index} className="mb-6">
               <div className="mb-2">
@@ -108,8 +134,9 @@ export default function Projects() {
                   )}
                 </h3>
                 <div className="text-sm" style={{ color: "var(--subtext)" }}>
-                  {pub.frontmatter.coauthors && `with ${pub.frontmatter.coauthors} • `}
+                  {pub.frontmatter.coauthors && `with ${pub.frontmatter.coauthors} / `}
                   {pub.frontmatter.publisher}
+                  {pub.frontmatter.date && ` / ${pub.frontmatter.date.split('-')[0]}`}
                 </div>
               </div>
               <div className="prose max-w-none">

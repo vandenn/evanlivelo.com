@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 };
 
 export default function About() {
+  const aboutIntro = getMarkdownContent('content/about/index.md');
   const meContent = getMarkdownContent('content/about/me.md');
   const websiteContent = getMarkdownContent('content/about/website.md');
   const stuffContent = getMarkdownContent('content/about/stuff.md');
@@ -34,6 +35,11 @@ export default function About() {
       <h1>
         About
       </h1>
+      <div className="mt-4 prose max-w-none">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {aboutIntro.content}
+        </ReactMarkdown>
+      </div>
 
       <div className="space-y-8 mt-8">
         <section>

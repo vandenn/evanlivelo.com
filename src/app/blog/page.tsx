@@ -1,7 +1,9 @@
 import readingDuration from 'reading-duration';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getBlogFiles } from '@/lib/markdown';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { getBlogFiles, getMarkdownContent } from '@/lib/markdown';
 import type { Metadata } from 'next';
 import { sharedMetadata } from '../layout';
 
@@ -23,6 +25,7 @@ export const metadata: Metadata = {
 };
 
 export default function Blog() {
+  const blogIntro = getMarkdownContent('content/blog/index.md');
   const posts = getBlogFiles();
 
   return (
@@ -30,6 +33,11 @@ export default function Blog() {
       <h1>
         Blog
       </h1>
+      <div className="mt-4 prose max-w-none">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {blogIntro.content}
+        </ReactMarkdown>
+      </div>
 
       <div className="space-y-8 mt-8">
         {posts.map((post, index) => (
