@@ -109,7 +109,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID) {
+  if (process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID) {
     Clarity.init(process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID);
   }
 
