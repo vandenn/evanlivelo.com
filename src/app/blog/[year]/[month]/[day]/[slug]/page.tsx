@@ -82,10 +82,10 @@ export default async function BlogPost({
       <article>
         <header className="mb-8">
           <Title className="mb-4">{post.frontmatter.title}</Title>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {post.frontmatter.date && (
               <>
-                <span>
+                <span className="whitespace-nowrap">
                   {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
@@ -97,13 +97,13 @@ export default async function BlogPost({
             )}
             {post.frontmatter.author && (
               <>
-                <span>{post.frontmatter.author}</span>
+                <span className="whitespace-nowrap">{post.frontmatter.author}</span>
                 <span>/</span>
               </>
             )}
-            <span>{readingDuration(post.content, { wordsPerMinute: 200, emoji: false })}</span>
+            <span className="whitespace-nowrap">{readingDuration(post.content, { wordsPerMinute: 200, emoji: false })}</span>
             <span>/</span>
-            <span className="flex items-center gap-2">
+            <span className="flex items-center gap-2 whitespace-nowrap">
               <SocialIconButton
                 href="mailto:evan.livelo@gmail.com"
                 ariaLabel="Email"
