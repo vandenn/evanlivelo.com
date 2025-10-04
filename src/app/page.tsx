@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import Title from "@/components/Title";
 import LinkButton from "@/components/LinkButton";
 import SocialIconButton from "@/components/SocialIconButton";
 import { UserIcon, WrenchIcon, MailIcon, DocumentIcon, GitHubIcon, LinkedInIcon, SocialsMailIcon } from "@/components/icons";
@@ -14,7 +15,7 @@ export default function Home() {
     <>
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 items-center mb-12 max-sm:gap-6">
         <div className="space-y-4">
-          <h1 className="lg:text-7xl leading-tight">
+          <Title className="leading-tight">
             <span style={{ color: "var(--text)" }}>Hi! I'm </span>
             <Link
               target="_blank"
@@ -24,7 +25,7 @@ export default function Home() {
               Evan Livelo
             </Link>
             <span style={{ color: "var(--text)" }}>.</span>
-          </h1>
+          </Title>
 
           <div className="prose max-w-none text-base lg:text-lg leading-relaxed">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>

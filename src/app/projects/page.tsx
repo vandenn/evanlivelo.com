@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import Title from '@/components/Title';
 import { getProjectFiles, getPublicationFiles, getMarkdownContent } from '@/lib/markdown';
 import type { Metadata } from 'next';
 import { sharedMetadata } from '../layout';
@@ -30,9 +31,9 @@ export default function Projects() {
 
   return (
     <>
-      <h1>
+      <Title>
         Projects
-      </h1>
+      </Title>
       <div className="mt-4 prose max-w-none">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {projectsIntro.content}
@@ -41,7 +42,7 @@ export default function Projects() {
 
       <div className="space-y-8">
         <section>
-          <h2 id="side-projects" className="mt-8 mb-4">Side Projects</h2>
+          <h1 id="side-projects" className="mt-8 mb-4">Side Projects</h1>
           <div className="mb-4 prose max-w-none">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {sideProjectsIntro.content}
@@ -92,7 +93,7 @@ export default function Projects() {
         </section>
 
         <section>
-          <h2 id="publications" className="mt-8 mb-4">Publications</h2>
+          <h1 id="publications" className="mt-8 mb-4">Publications</h1>
           <div className="mb-4 prose max-w-none">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {publicationsIntro.content}

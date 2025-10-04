@@ -2,6 +2,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import readingDuration from 'reading-duration';
 import { getBlogPost, getBlogFiles } from '@/lib/markdown';
+import Title from '@/components/Title';
 import LinkButton from '@/components/LinkButton';
 import { MailIcon } from '@/components/icons';
 import SocialIconButton from '@/components/SocialIconButton';
@@ -89,7 +90,7 @@ export default async function BlogPost({
     <>
       <article>
         <header className="mb-8">
-          <h1 className="mb-4">{post.frontmatter.title}</h1>
+          <Title className="mb-4">{post.frontmatter.title}</Title>
           <div className="flex items-center gap-2 text-sm">
             {post.frontmatter.date && (
               <>

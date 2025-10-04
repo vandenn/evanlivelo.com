@@ -7,11 +7,11 @@ og-img: "/images/blog/2025-10-02-hello-world/opengraph-image.png"
 tags: [hello world, markdown]
 ---
 
-## Welcome!
+# Welcome!
 
 Welcome to my blog! _This is primarily a page to test out and make sure the Markdown features look right on my page_ when they're rendered dynamically by [Next.js](https://nextjs.org/), but I'll also use this opportunity to quickly talk a bit about what I want to do here.
 
-## What to expect
+# What to expect
 
 I want to use this space as more of an outlet to put my thoughts to words, and a way to quickly share those words with other people. I've also done a lot of experiments in the past, and I realized that I've never really found a nice place to document them apart from stuffing the code into a repository and adding a `README`.
 
@@ -27,6 +27,6 @@ cat README.md
 
 ![Diagram](/images/blog/2025-10-02-hello-world/diagram.png)
 
-## Cheers!
+# Cheers!
 
 That's it for this mini blog post. I'm not really sure yet what cadence I'll be able to write, but I hope to release more soon. See you in my [future blog posts](/blog)!

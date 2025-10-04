@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import Title from '@/components/Title';
 import { getBlogFiles, getMarkdownContent } from '@/lib/markdown';
 import type { Metadata } from 'next';
 import { sharedMetadata } from '../layout';
@@ -30,9 +31,9 @@ export default function Blog() {
 
   return (
     <>
-      <h1>
+      <Title>
         Blog
-      </h1>
+      </Title>
       <div className="mt-4 prose max-w-none">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {blogIntro.content}
@@ -62,9 +63,9 @@ export default function Blog() {
                   </div>
                 )}
                 <div className="flex-1">
-                  <h3 style={{ color: "var(--accent)" }}>
+                  <h1 style={{ color: "var(--accent)" }}>
                     {post.frontmatter.title}
-                  </h3>
+                  </h1>
                   <div className="flex items-center gap-2 mb-2 text-sm" style={{ color: "var(--subtext)" }}>
                     {post.frontmatter.date && (
                       <>

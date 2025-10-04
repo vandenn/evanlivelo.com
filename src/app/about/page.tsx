@@ -2,6 +2,7 @@ import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import LinkButton from '@/components/LinkButton';
+import Title from '@/components/Title';
 import { MailIcon, DocumentIcon } from '@/components/icons';
 import { getMarkdownContent } from '@/lib/markdown';
 import type { Metadata } from 'next';
@@ -32,9 +33,9 @@ export default function About() {
 
   return (
     <>
-      <h1>
+      <Title>
         About
-      </h1>
+      </Title>
       <div className="mt-4 prose max-w-none">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {aboutIntro.content}
@@ -43,7 +44,7 @@ export default function About() {
 
       <div className="space-y-8 mt-8">
         <section>
-          <h2 id="me" className="mb-4">About Me</h2>
+          <h1 id="me" className="mb-4">About Me</h1>
           <div className="flex flex-col md:flex-row md:items-center gap-6">
             <div className="flex-1">
               <div className="prose max-w-none">
@@ -69,7 +70,7 @@ export default function About() {
         </section>
 
         <section>
-          <h2 id="stuff" className="mt-8 mb-4">Stuff I've Done</h2>
+          <h1 id="stuff" className="mt-8 mb-4">Stuff I've Done</h1>
           <div className="prose max-w-none">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {stuffContent.content}
@@ -78,7 +79,7 @@ export default function About() {
         </section>
 
         <section>
-          <h2 id="website" className="mt-8 mb-4">About this Website</h2>
+          <h1 id="website" className="mt-8 mb-4">About this Website</h1>
           <div className="prose max-w-none">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {websiteContent.content}
