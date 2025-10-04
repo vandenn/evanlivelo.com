@@ -1,9 +1,8 @@
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import readingDuration from 'reading-duration';
 import { getBlogPost, getBlogFiles } from '@/lib/markdown';
 import Title from '@/components/Title';
 import LinkButton from '@/components/LinkButton';
+import BlogContent from '@/components/BlogContent';
 import { MailIcon } from '@/components/icons';
 import SocialIconButton from '@/components/SocialIconButton';
 import { GitHubIcon, LinkedInIcon, SocialsMailIcon } from '@/components/icons';
@@ -78,14 +77,6 @@ export default async function BlogPost({
     notFound();
   }
 
-  const markdownComponents = {
-    img: ({ src, alt }: any) => (
-      <span className="flex justify-center my-4">
-        <img src={src} alt={alt || ''} className="max-w-full h-auto" />
-      </span>
-    ),
-  };
-
   return (
     <>
       <article>
@@ -135,11 +126,7 @@ export default async function BlogPost({
           </div>
         </header>
 
-        <div className="prose max-w-none">
-          <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-            {post.content}
-          </ReactMarkdown>
-        </div>
+        <BlogContent content={post.content} />
 
         <div className="flex justify-center my-8">
           <LinkButton href="mailto:evan.livelo@gmail.com" icon={<MailIcon />}>
