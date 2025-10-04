@@ -7,7 +7,7 @@ interface TitleProps {
 
 export default function Title({ children, className = '' }: TitleProps) {
   return (
-    <div className={`text-6xl md:text-7xl mb-4 ${className}`} style={{ fontFamily: 'var(--font-dm-serif), serif' }}>
+    <div className={`text-5xl md:text-6xl mb-4 ${className}`} style={{ fontFamily: 'var(--font-dm-serif), serif' }}>
       {children}
     </div>
   );
