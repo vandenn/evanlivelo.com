@@ -103,6 +103,12 @@ export default async function BlogPost({
                 <span>/</span>
               </>
             )}
+            {post.frontmatter.author && (
+              <>
+                <span>{post.frontmatter.author}</span>
+                <span>/</span>
+              </>
+            )}
             <span>{readingDuration(post.content, { wordsPerMinute: 200, emoji: false })}</span>
             <span>/</span>
             <span className="flex items-center gap-2">
