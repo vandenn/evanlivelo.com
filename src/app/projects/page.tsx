@@ -66,11 +66,11 @@ export default function Projects() {
               <div className="flex flex-wrap gap-2 mt-2 items-center">
                 {project.frontmatter.date && (
                   <>
-                    <span className="text-sm" style={{ color: "var(--subtext)" }}>
+                    <span style={{ color: "var(--subtext)" }}>
                       {project.frontmatter.date.split('-')[0]}
                     </span>
                     {project.frontmatter.tech && (
-                      <span className="text-sm" style={{ color: "var(--subtext)" }}>/</span>
+                      <span style={{ color: "var(--subtext)" }}>/</span>
                     )}
                   </>
                 )}
@@ -115,7 +115,7 @@ export default function Projects() {
                     pub.frontmatter.title
                   )}
                 </h2>
-                <div className="text-sm" style={{ color: "var(--subtext)" }}>
+                <div style={{ color: "var(--subtext)" }}>
                   {pub.frontmatter.coauthors && `with ${pub.frontmatter.coauthors} / `}
                   {pub.frontmatter.publisher}
                   {pub.frontmatter.date && ` / ${pub.frontmatter.date.split('-')[0]}`}

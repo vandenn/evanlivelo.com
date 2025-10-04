@@ -91,7 +91,7 @@ export default async function BlogPost({
       <article>
         <header className="mb-8">
           <Title className="mb-4">{post.frontmatter.title}</Title>
-          <div className="flex items-center gap-2 text-sm">
+          <div className="flex items-center gap-2">
             {post.frontmatter.date && (
               <>
                 <span>

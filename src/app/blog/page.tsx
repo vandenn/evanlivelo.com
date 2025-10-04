@@ -66,7 +66,7 @@ export default function Blog() {
                   <h1 style={{ color: "var(--accent)" }}>
                     {post.frontmatter.title}
                   </h1>
-                  <div className="flex items-center gap-2 mb-2 text-sm" style={{ color: "var(--subtext)" }}>
+                  <div className="flex items-center gap-2 mb-2" style={{ color: "var(--subtext)" }}>
                     {post.frontmatter.date && (
                       <>
                         <span>
