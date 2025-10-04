@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -49,7 +50,11 @@ export default function BlogContent({ content }: BlogContentProps) {
 
   return (
     <div className="prose max-w-none prose-pre:bg-transparent [&_pre]:!p-0 [&_pre]:!m-0 prose-code:before:content-none prose-code:after:content-none">
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={blogMarkdownComponents}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
+        components={blogMarkdownComponents}
+      >
         {content}
       </ReactMarkdown>
     </div>
