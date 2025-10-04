@@ -43,9 +43,9 @@ export default function About() {
 
       <div className="space-y-8 mt-8">
         <section>
+          <h2 id="me" className="mb-4">About Me</h2>
           <div className="flex flex-col md:flex-row md:items-center gap-6">
             <div className="flex-1">
-              <h2 id="me" className="mb-4">About Me</h2>
               <div className="prose max-w-none">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {meContent.content}
@@ -54,7 +54,7 @@ export default function About() {
             </div>
             {meContent.frontmatter.image && (
               <div className="flex-shrink-0">
-                <div className="relative w-full md:w-64 h-64 rounded-lg overflow-hidden">
+                <div className="relative w-full md:w-48 h-48 rounded-lg overflow-hidden">
                   <Image
                     src={meContent.frontmatter.image}
                     alt="About Me"
@@ -69,19 +69,19 @@ export default function About() {
         </section>
 
         <section>
-          <h2 id="website" className="mt-8 mb-4">About this Website</h2>
+          <h2 id="stuff" className="mt-8 mb-4">Stuff I've Done</h2>
           <div className="prose max-w-none">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {websiteContent.content}
+              {stuffContent.content}
             </ReactMarkdown>
           </div>
         </section>
 
         <section>
-          <h2 id="stuff" className="mt-8 mb-4">Stuff I've Done</h2>
+          <h2 id="website" className="mt-8 mb-4">About this Website</h2>
           <div className="prose max-w-none">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {stuffContent.content}
+              {websiteContent.content}
             </ReactMarkdown>
           </div>
         </section>
