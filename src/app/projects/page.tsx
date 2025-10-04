@@ -50,7 +50,7 @@ export default function Projects() {
           </div>
           {projects.map((project, index) => (
             <div key={index} className="mb-8">
-              <h3>
+              <h2>
                 {project.frontmatter.link ? (
                   <a
                     href={project.frontmatter.link}
@@ -62,7 +62,7 @@ export default function Projects() {
                 ) : (
                   project.frontmatter.title
                 )}
-              </h3>
+              </h2>
               <div className="flex flex-wrap gap-2 mt-2 items-center">
                 {project.frontmatter.date && (
                   <>
@@ -102,7 +102,7 @@ export default function Projects() {
           {publications.map((pub, index) => (
             <div key={index} className="mb-6">
               <div className="mb-2">
-                <h3>
+                <h2>
                   {pub.frontmatter.link ? (
                     <a
                       href={pub.frontmatter.link}
@@ -114,7 +114,7 @@ export default function Projects() {
                   ) : (
                     pub.frontmatter.title
                   )}
-                </h3>
+                </h2>
                 <div className="text-sm" style={{ color: "var(--subtext)" }}>
                   {pub.frontmatter.coauthors && `with ${pub.frontmatter.coauthors} / `}
                   {pub.frontmatter.publisher}

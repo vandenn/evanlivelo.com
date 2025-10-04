@@ -21,6 +21,7 @@ body {
   background: var(--background);
   color: var(--text);
   font-family: var(--font-roboto), Helvetica, sans-serif;
+  font-size: 1.125rem;
   margin: 0;
   padding: 0;
 }
@@ -70,6 +71,10 @@ div {
 }
 
 /* Prose overrides */
+.prose {
+  font-size: 1.125rem;
+}
+
 .prose h1,
 .prose h2,
 .prose h3,

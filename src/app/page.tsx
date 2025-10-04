@@ -27,7 +27,7 @@ export default function Home() {
             <span style={{ color: "var(--text)" }}>.</span>
           </Title>
 
-          <div className="prose max-w-none text-base lg:text-lg leading-relaxed">
+          <div className="prose max-w-none leading-relaxed">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {homeContent.content}
             </ReactMarkdown>
