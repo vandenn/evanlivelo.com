@@ -5,7 +5,7 @@ tech:
   - React.js
   - Material UI
   - Gatsby
-link: "https://github.com/vandenn/personal-site"
+link: "https://github.com/vandenn/evanlivelo.com-v1"
 ---
 
 The first time I decided to make a personal website, I made it using the stack I used day-to-day for work at the time: React.js + Material UI.
