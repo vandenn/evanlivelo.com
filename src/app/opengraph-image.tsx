@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og";
+import fs from "fs";
+import path from "path";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 export const alt = "Evan Livelo";
 export const size = {
@@ -11,13 +13,13 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
-  const dmSerifFont = fetch(
-    new URL("../../public/fonts/DMSerifText-Regular.ttf", import.meta.url)
-  ).then((res) => res.arrayBuffer());
+  const dmSerifFont = fs.readFileSync(
+    path.join(process.cwd(), "public/fonts/DMSerifText-Regular.ttf")
+  );
 
-  const robotoFont = fetch(
-    new URL("../../public/fonts/Roboto-Regular.ttf", import.meta.url)
-  ).then((res) => res.arrayBuffer());
+  const robotoFont = fs.readFileSync(
+    path.join(process.cwd(), "public/fonts/Roboto-Regular.ttf")
+  );
 
   return new ImageResponse(
     (
@@ -85,13 +87,13 @@ export default async function Image() {
       fonts: [
         {
           name: "DM Serif Text",
-          data: await dmSerifFont,
+          data: dmSerifFont,
           style: "normal",
           weight: 400,
         },
         {
           name: "Roboto",
-          data: await robotoFont,
+          data: robotoFont,
           style: "normal",
           weight: 400,
         },
