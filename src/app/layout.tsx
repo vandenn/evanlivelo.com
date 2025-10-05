@@ -77,6 +77,7 @@ export const sharedMetadata = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(sharedMetadata.siteUrl),
   title: {
     default: "Evan Livelo",
     template: "%s | Evan Livelo"
