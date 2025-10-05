@@ -93,11 +93,20 @@ export const metadata: Metadata = {
     siteName: sharedMetadata.siteName,
     title: "Evan Livelo",
     description: sharedMetadata.description,
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Evan Livelo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Evan Livelo",
     description: sharedMetadata.description,
+    images: ["/opengraph-image.png"],
   },
   robots: {
     index: true,
