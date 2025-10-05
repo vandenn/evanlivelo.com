@@ -9,7 +9,7 @@ tags: [hello world, markdown]
 
 # Welcome!
 
-Welcome to my blog! _This is primarily a page to test out and make sure the Markdown features look right on my page_ when they're rendered dynamically by [Next.js](https://nextjs.org/), but I'll also use this opportunity to quickly talk a bit about what I want to do here.
+Welcome to my blog! _This is primarily a page to test out and make sure the Markdown features look right on my page_ when they're rendered dynamically by [React Markdown](https://github.com/remarkjs/react-markdown), but I'll also use this opportunity to quickly talk a bit about what I want to do here.
 
 # What to expect
 
@@ -24,8 +24,13 @@ cat README.md
 
 - I'll be able to share my thoughts and ideas about different topics I encounter in my day-to-day, both work and non-work; and
 - I'll have a place to put down project notes that don't quite fit in `README`s, like learnings, struggles, and realizations
+- I'd also like to use it as an outlet for thought pieces on my hobbies, like Japanese learning or board game reviews.
 
 ![Diagram](/images/blog/2025-10-02-hello-world/diagram.png)
+
+<center>
+<i>I came up with this random diagram mainly for image rendering.</i>
+</center>
 
 # Cheers!
 
