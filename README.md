@@ -2,6 +2,7 @@
 
 # evanlivelo.com
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/128df218-f42d-4e17-85ca-643ed7125fce/deploy-status)](https://app.netlify.com/projects/evanlivelo/deploys)
 ![node](https://img.shields.io/badge/node.js-20+-green)
 
 Welcome to my personal website! For this iteration, I implemented the website in Next.js with Tailwind CSS.
