@@ -37,8 +37,8 @@ export async function generateMetadata({
 
   const { title, description, date, tags } = post.frontmatter;
   const ogImage = post.frontmatter['og-img'];
-  const url = `https://evanlivelo.com/blog/${year}/${month}/${day}/${slug}`;
-  const absoluteImageUrl = ogImage?.startsWith('http') ? ogImage : `https://evanlivelo.com${ogImage}`;
+  const url = `${sharedMetadata.siteUrl}/blog/${year}/${month}/${day}/${slug}`;
+  const absoluteImageUrl = ogImage?.startsWith('http') ? ogImage : `${sharedMetadata.siteUrl}${ogImage}`;
 
   // Combine default keywords with post-specific tags
   const postTags = Array.isArray(tags) ? tags : [];
@@ -50,17 +50,19 @@ export async function generateMetadata({
     keywords: allKeywords,
     openGraph: {
       title,
-      description: description || title,
-      type: "article",
-      publishedTime: date,
       url,
-      ...(ogImage && { images: [{ url: absoluteImageUrl }] }),
+      description: description || title,
+      siteName: sharedMetadata.siteName,
+      type: "article",
+      locale: sharedMetadata.locale,
+      publishedTime: date,
+      images: ogImage ? [{ url: absoluteImageUrl }] : sharedMetadata.images,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: description || title,
-      ...(ogImage && { images: [absoluteImageUrl] }),
+      images: ogImage ? [absoluteImageUrl] : [sharedMetadata.images[0].url],
     },
   };
 }

@@ -74,6 +74,14 @@ export const sharedMetadata = {
     "ML portfolio",
     "GenAI portfolio",
   ],
+  images: [
+    {
+      url: "/opengraph-image.png",
+      width: 1200,
+      height: 630,
+      alt: "Evan Livelo",
+    },
+  ],
 };
 
 export const metadata: Metadata = {
@@ -87,26 +95,19 @@ export const metadata: Metadata = {
   authors: [{ name: "Evan Livelo" }],
   creator: "Evan Livelo",
   openGraph: {
+    title: "Evan Livelo",
+    url: sharedMetadata.siteUrl,
+    description: sharedMetadata.description,
+    siteName: sharedMetadata.siteName,
     type: sharedMetadata.type,
     locale: sharedMetadata.locale,
-    url: sharedMetadata.siteUrl,
-    siteName: sharedMetadata.siteName,
-    title: "Evan Livelo",
-    description: sharedMetadata.description,
-    images: [
-      {
-        url: "/opengraph-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Evan Livelo",
-      },
-    ],
+    images: sharedMetadata.images,
   },
   twitter: {
     card: "summary_large_image",
     title: "Evan Livelo",
     description: sharedMetadata.description,
-    images: ["/opengraph-image.png"],
+    images: [sharedMetadata.images[0].url],
   },
   robots: {
     index: true,

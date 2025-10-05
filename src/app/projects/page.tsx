@@ -9,16 +9,18 @@ export const metadata: Metadata = {
   title: "Projects",
   openGraph: {
     title: "Projects | Evan Livelo",
-    description: sharedMetadata.description,
     url: `${sharedMetadata.siteUrl}/projects`,
+    description: sharedMetadata.description,
     siteName: sharedMetadata.siteName,
-    locale: sharedMetadata.locale,
     type: sharedMetadata.type,
+    locale: sharedMetadata.locale,
+    images: sharedMetadata.images,
   },
   twitter: {
     card: "summary_large_image",
     title: "Projects | Evan Livelo",
     description: sharedMetadata.description,
+    images: [sharedMetadata.images[0].url],
   },
 };
 
