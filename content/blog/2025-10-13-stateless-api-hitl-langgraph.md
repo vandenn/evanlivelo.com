@@ -186,7 +186,7 @@ Implementation-wise, in step 3, **pausing graph execution to get user input for 
 
 ## Using a graph execution checkpointer in LangGraph with an external database
 
-**This is where [LangGraph's `checkpointer`](https://langchain-ai.github.io/langgraph/concepts/persistence/#checkpoints) comes in**. LangGraph is able to snapshot graph state at each step through checkpoints, which it then saves in a place that depends on the checkpoint saver implementation you adopt. In this case, instead of using the `InMemorySaver`, I relied on an SQLite database and used LangGraph's `SqliteSaver`:
+**This is where [LangGraph's `checkpointer`](https://langchain-ai.github.io/langgraph/concepts/persistence/#checkpoints) comes in**. LangGraph is able to snapshot graph state at each step through checkpoints, which it then saves in a place that depends on the checkpoint saver implementation you adopt. In this case, instead of using the [`InMemorySaver`](https://langchain-ai.github.io/langgraph/reference/checkpoints/#langgraph.checkpoint.memory.InMemorySaver), I relied on an SQLite database and used LangGraph's [`SqliteSaver`](https://langchain-ai.github.io/langgraph/reference/checkpoints/#langgraph.checkpoint.sqlite.SqliteSaver)/[`AsyncSqliteSaver`](https://langchain-ai.github.io/langgraph/reference/checkpoints/#langgraph.checkpoint.sqlite.aio.AsyncSqliteSaver):
 
 ```python
 def stream_ai_tutor_workflow(...):
@@ -395,13 +395,13 @@ If you're working with other agentic frameworks, you'll likely find some kind of
 
 Even without existing implementation in the agentic framework you're using, **you can implement this if you design your own state snapshotting + execution resumption mechanism**. You'll just need the following things (or similar) in place:
 
-- A way to serialize graph/execution state to persistent storage and associating that state with that execution (e.g. via unique execution ID). One possibility would be something like saving to and loading from a `<thread_id>.json` file in some cache directory.
-- A way to terminate agentic execution at designated points, and a way to resume execution through recreation from the loaded graph/execution state, or designing your agent workflow to decide its execution plan differently from the get-go if it receives additional user input, for example. This can be as rudimentary as saving a dictionary-based state and breaking a `while` loop when human-in-the-loop is needed, then initializing a fresh `state` dictionary to the values loaded from persistent storage + having additional properties to set other execution parameters, like having a `"current_node"`.
+- **A way to serialize graph/execution state to persistent storage and associating that state with that execution (e.g. via unique execution ID)**. One possibility would be something like saving to and loading from a `<thread_id>.json` file in some cache directory.
+- **A way to terminate agentic execution at designated points, and a way to resume execution through recreation from the loaded graph/execution state**, or designing your agent workflow to decide its execution plan differently from the get-go if it receives additional user input, for example. This can be as rudimentary as saving a dictionary-based state and breaking a `while` loop when human-in-the-loop is needed, then initializing a fresh `state` dictionary to the values loaded from persistent storage + having additional properties to set other execution parameters, like having a `"current_node"`.
 
 # Final notes
 
-You can find all the source code used here in the [Learn with GenAI repository (tagged at the latest commit as of writing)](https://github.com/vandenn/learn-with-genai/tree/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8).
+You can find all the source code used here in the [Learn with GenAI repository (permalinked to the latest commit as of writing)](https://github.com/vandenn/learn-with-genai/tree/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8).
 
-You can also find more examples of how you can [use LangGraph for human-in-the-loop in their documentation here](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/add-human-in-the-loop/#approve-or-reject). While my current code implementation may not apply perfectly for future versions of LangGraph, I hope it still helps give you an idea of how to use it in a stateless setting.
+You can also find more examples of how you can [use LangGraph for human-in-the-loop in their documentation here](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/add-human-in-the-loop/#approve-or-reject). While my current code implementation may not apply perfectly for future versions of LangGraph, I hope this blog post still helps give you an idea of how to use it in a stateless setting.
 
-**Lastly, the Learn with GenAI repository is still very much a work-in-progress** that I tinker with from time to time, so if you have any suggestions or thoughts about this approval process implementation, please feel free to leave a comment, [reach out](mailto:evan.livelo@gmail.com), or even raise a PR!
+**Lastly, the Learn with GenAI repository is still very much a work-in-progress** that I tinker with from time to time, so if you have any suggestions or thoughts about this approval process implementation, please feel free to [reach out](mailto:evan.livelo@gmail.com) or even raise a PR! For example, while writing this, I realized that there were some synchronous calls (like the `SqliteSaver`) being made within `async` handlers in the code, which I'll need to refactor sometime. 😆
