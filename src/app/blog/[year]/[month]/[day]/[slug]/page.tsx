@@ -137,6 +137,8 @@ export default async function BlogPost({
           </LinkButton>
         </div>
 
+        <hr className="my-4" />
+
         <Comments title={post.frontmatter.title} />
       </article>
     </>
