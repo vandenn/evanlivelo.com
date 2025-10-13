@@ -74,10 +74,10 @@ Each node in this state graph is an individual function that takes in the curren
 
 <figcaption>"Learn with GenAI" logic module's directory structure</figcaption>
 
-When a user message comes in, **the system calls the logic function that builds the graph, initializes state, and executes the graph node by node through a `graph.stream` loop**, yielding output messages (as a streaming response in the endpoint) from each node in the graph it goes through and associating each message with a `type` to let the frontend know how to handle it.
+When a user message comes in, **the system calls the logic function that builds the graph, initializes state, and executes the graph node by node through a `graph.astream` loop**, yielding output messages (as a streaming response in the endpoint) from each node in the graph it goes through and associating each message with a `type` to let the frontend know how to handle it.
 
 ```python
-for step_result in graph.stream(graph_input, config):
+async for step_result in graph.astream(graph_input, config):
     ...
     step_state = list(step_result.values())[0]
     if "output_messages" in step_state:
@@ -88,12 +88,12 @@ for step_result in graph.stream(graph_input, config):
             }
 ```
 
-<figcaption>Snippet of <code>graph.stream</code>'s <code>for</code> loop for yielding output messages (<a href="https://github.com/vandenn/learn-with-genai/blob/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8/backend/src/logic/ai_tutor/graphs/main.py#L87"><code>/backend/src/logic/ai_tutor/graphs/main.py</code></a>)</figcaption>
+<figcaption>Snippet of <code>graph.astream</code>'s <code>for</code> loop for yielding output messages (<a href="https://github.com/vandenn/learn-with-genai/blob/8372d4a58becafa9e7d1e5263c7f064b42da9026/backend/src/logic/ai_tutor/graphs/main.py#L93"><code>/backend/src/logic/ai_tutor/graphs/main.py</code></a>)</figcaption>
 
 For example, in the first node "Analyze Query", it determines what course of action to take depending on the user message. Based on the its decision, it yields the a corresponding `"type": "step"` message.
 
 ```python
-response = llm.invoke(messages).content.strip()
+response = (await llm.ainvoke(messages)).content.strip()
 query_type = json.loads(response).get("query_type")
 if query_type == "SEARCH":
     return {
@@ -115,7 +115,7 @@ else:
     }
 ```
 
-<figcaption>Snippet of the "Analyze Query" node's output message handling (<a href="https://github.com/vandenn/learn-with-genai/blob/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8/backend/src/logic/ai_tutor/nodes/analysis/query_analysis.py#L39"><code>/backend/src/logic/ai_tutor/nodes/analysis/query_analysis.py</code></a>)</figcaption>
+<figcaption>Snippet of the "Analyze Query" node's output message handling (<a href="https://github.com/vandenn/learn-with-genai/blob/8372d4a58becafa9e7d1e5263c7f064b42da9026/backend/src/logic/ai_tutor/nodes/analysis/query_analysis.py#L39"><code>/backend/src/logic/ai_tutor/nodes/analysis/query_analysis.py</code></a>)</figcaption>
 
 The frontend then receives this message as part of the streaming response from the `/chat` endpoint as follows.
 
@@ -145,7 +145,7 @@ for (const line of lines) {
         ...
 ```
 
-<figcaption>Handler in the frontend to add messages received from backend to the state for rendering (<a href="https://github.com/vandenn/learn-with-genai/blob/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8/frontend/src/components/AIAssistant.tsx#L59"><code>/frontend/src/components/AIAssistant.tsx</code></a>)</figcaption>
+<figcaption>Handler in the frontend to add messages received from backend to the state for rendering (<a href="https://github.com/vandenn/learn-with-genai/blob/8372d4a58becafa9e7d1e5263c7f064b42da9026/frontend/src/components/AIAssistant.tsx#L58"><code>/frontend/src/components/AIAssistant.tsx</code></a>)</figcaption>
 
 It then shows up in the UI as an individual AI tutor message.
 
@@ -161,7 +161,7 @@ if (data.type === "final") {
 }
 ```
 
-<figcaption>Turning off the "Thinking" indicator when it's the final message to be sent (<a href="https://github.com/vandenn/learn-with-genai/blob/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8/frontend/src/components/AIAssistant.tsx#L92"><code>/frontend/src/components/AIAssistant.tsx</code></a>)</figcaption>
+<figcaption>Turning off the "Thinking" indicator when it's the final message to be sent (<a href="https://github.com/vandenn/learn-with-genai/blob/8372d4a58becafa9e7d1e5263c7f064b42da9026/frontend/src/components/AIAssistant.tsx#L92"><code>/frontend/src/components/AIAssistant.tsx</code></a>)</figcaption>
 
 ![Learn with GenAI "final" Message UI](/images/blog/2025-10-13-stateless-api-hitl-langgraph/learn_with_genai_final_message.png)
 
@@ -189,23 +189,20 @@ Implementation-wise, in step 3, **pausing graph execution to get user input for 
 **This is where [LangGraph's `checkpointer`](https://langchain-ai.github.io/langgraph/concepts/persistence/#checkpoints) comes in**. LangGraph is able to snapshot graph state at each step through checkpoints, which it then saves in a place that depends on the checkpoint saver implementation you adopt. In this case, instead of using the [`InMemorySaver`](https://langchain-ai.github.io/langgraph/reference/checkpoints/#langgraph.checkpoint.memory.InMemorySaver), I relied on an SQLite database and used LangGraph's [`SqliteSaver`](https://langchain-ai.github.io/langgraph/reference/checkpoints/#langgraph.checkpoint.sqlite.SqliteSaver)/[`AsyncSqliteSaver`](https://langchain-ai.github.io/langgraph/reference/checkpoints/#langgraph.checkpoint.sqlite.aio.AsyncSqliteSaver):
 
 ```python
-def stream_ai_tutor_workflow(...):
+async def stream_ai_tutor_workflow(...):
     graph_builder = create_tutor_graph_builder()
-    checkpointer = SqliteSaver(
-        sqlite3.connect(
-            settings.data_path / "ai_tutor_state.db", check_same_thread=False
-        )
-    )
+    conn = await aiosqlite.connect(settings.data_path / "ai_tutor_state.db")
+    checkpointer = AsyncSqliteSaver(conn)
     graph = graph_builder.compile(checkpointer=checkpointer)
 ```
 
-<figcaption>Initializing the checkpointer (<a href="https://github.com/vandenn/learn-with-genai/blob/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8/backend/src/logic/ai_tutor/graphs/main.py#L57"><code>/backend/src/logic/ai_tutor/graphs/main.py</code></a>)</figcaption>
+<figcaption>Initializing the checkpointer (<a href="https://github.com/vandenn/learn-with-genai/blob/8372d4a58becafa9e7d1e5263c7f064b42da9026/backend/src/logic/ai_tutor/graphs/main.py#L57"><code>/backend/src/logic/ai_tutor/graphs/main.py</code></a>)</figcaption>
 
 This way, our graph now references a consistent SQLite database every time it gets initialized (which, as of now, means every time the `/chat` endpoint is called).
 
 ## Identifying the same execution across API calls via a `thread_id`
 
-**It's also important that a `thread_id` is set to identify a single, unique graph execution**, which will help LangGraph associate that this second call to `graph.stream` is a continuation of the first call, and thus resume execution of the same graph accordingly. This `thread_id` is passed to the frontend as reference for every message sent by the AI assistant, and is given by the frontend as a parameter alongside the user's approval.
+**It's also important that a `thread_id` is set to identify a single, unique graph execution**, which will help LangGraph associate that this second call to `graph.astream` is a continuation of the first call, and thus resume execution of the same graph accordingly. This `thread_id` is passed to the frontend as reference for every message sent by the AI assistant, and is given by the frontend as a parameter alongside the user's approval.
 
 In my implementation, **I handle `thread_id` generation in the calling route handler**. This considers two possibilities:
 
@@ -220,7 +217,7 @@ async def chat(request: AITutorChatRequest):
 
 	async def generate_stream():
 		try:
-		    for result in stream_ai_tutor_workflow(
+		    async for result in stream_ai_tutor_workflow(
 		        user_message=request.message,
 		        thread_id=thread_id, # thread_id passed to the stream_ai_tutor_workflow here
 		        ...
@@ -238,22 +235,22 @@ async def chat(request: AITutorChatRequest):
 	)
 ```
 
-<figcaption>Snippet of the <code>/chat</code> endpoint handler initializing the <code>thread_id</code> (<a href="https://github.com/vandenn/learn-with-genai/blob/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8/backend/src/v1/routes/ai_tutor.py#L16"><code>/backend/src/v1/routes/ai_tutor.py</code></a>)</figcaption>
+<figcaption>Snippet of the <code>/chat</code> endpoint handler initializing the <code>thread_id</code> (<a href="https://github.com/vandenn/learn-with-genai/blob/8372d4a58becafa9e7d1e5263c7f064b42da9026/backend/src/v1/routes/ai_tutor.py#L16"><code>/backend/src/v1/routes/ai_tutor.py</code></a>)</figcaption>
 
-In the `stream_ai_tutor_workflow` function, it's then passed as part of the `config` used when calling `graph.stream` to iterate on each node.
+In the `stream_ai_tutor_workflow` function, it's then passed as part of the `config` used when calling `graph.astream` to iterate on each node.
 
 ```python
 config = {"configurable": {"thread_id": thread_id}}
 
-for step_result in graph.stream(graph_input, config):
+async for step_result in graph.astream(graph_input, config):
     ...
 ```
 
-<figcaption>Initializing the call to <code>graph.stream</code> with the <code>thread_id</code> (<a href="https://github.com/vandenn/learn-with-genai/blob/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8/backend/src/logic/ai_tutor/graphs/main.py#L85"><code>/backend/src/logic/ai_tutor/graphs/main.py</code></a>)</figcaption>
+<figcaption>Initializing the call to <code>graph.astream</code> with the <code>thread_id</code> (<a href="https://github.com/vandenn/learn-with-genai/blob/8372d4a58becafa9e7d1e5263c7f064b42da9026/backend/src/logic/ai_tutor/graphs/main.py#L82"><code>/backend/src/logic/ai_tutor/graphs/main.py</code></a>)</figcaption>
 
 ## Determining the initial input to the graph based on whether or not you have human-in-the-loop input
 
-**The `graph_input` being passed to `graph.stream` will also depend on whether or not it's the start of a graph execution or the continuation of an existing one**. If it's the former, the system initializes the state. On the other hand, for the latter, a `Command` is issued to resume execution with some specific data, in this case `hitl_input`, which is a dictionary passed from the frontend that contains whether or not the user has given their approval in the form of `{ "content": <decision> }`.
+**The `graph_input` being passed to `graph.astream` will also depend on whether or not it's the start of a graph execution or the continuation of an existing one**. If it's the former, the system initializes the state. On the other hand, for the latter, a `Command` is issued to resume execution with some specific data, in this case `hitl_input`, which is a dictionary passed from the frontend that contains whether or not the user has given their approval in the form of `{ "content": <decision> }`.
 
 ```python
 if (
@@ -275,11 +272,11 @@ else:  # Initial state
 		output_messages=[],
 	)
 ...
-for step_result in graph.stream(graph_input, config):
+async for step_result in graph.astream(graph_input, config):
 ...
 ```
 
-<figcaption>Adjusting initialization logic based on whether or not there's human-in-the-loop input (<a href="https://github.com/vandenn/learn-with-genai/blob/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8/backend/src/logic/ai_tutor/graphs/main.py#L66"><code>/backend/src/logic/ai_tutor/graphs/main.py</code></a>)</figcaption>
+<figcaption>Adjusting initialization logic based on whether or not there's human-in-the-loop input (<a href="https://github.com/vandenn/learn-with-genai/blob/8372d4a58becafa9e7d1e5263c7f064b42da9026/backend/src/logic/ai_tutor/graphs/main.py#L63"><code>/backend/src/logic/ai_tutor/graphs/main.py</code></a>)</figcaption>
 
 ## Using LangGraph's `interrupt` function to stop graph execution (within a node) for HITL input
 
@@ -289,7 +286,7 @@ The actual pausing (or more precisely, "interrupting") logic can now be implemen
 from langgraph.types import interrupt
 ...
 
-def request_note_edit_consent(state: TutorState) -> TutorState:
+async def request_note_edit_consent(state: TutorState) -> TutorState:
     decision = interrupt( # The key function call for pausing graph execution
         {
             "type": "note_consent",
@@ -297,7 +294,7 @@ def request_note_edit_consent(state: TutorState) -> TutorState:
         }
     )
 
-    # The execution resumes here when `graph.stream` receives `Command(resume=hitl_input)` as `graph_input`.
+    # The execution resumes here when `graph.astream` receives `Command(resume=hitl_input)` as `graph_input`.
     # Here, the `decision` variable will hold `hitl_input`.
 
     if decision["content"] == "approve":
@@ -317,13 +314,13 @@ def request_note_edit_consent(state: TutorState) -> TutorState:
         }
 ```
 
-<figcaption>How LangGraph's <code>interrupt</code> function is used and where the graph execution resumes (<a href="https://github.com/vandenn/learn-with-genai/blob/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8/backend/src/logic/ai_tutor/nodes/consent/note_consent.py#L6"><code>/backend/src/logic/ai_tutor/nodes/consent/note_consent.py
+<figcaption>How LangGraph's <code>interrupt</code> function is used and where the graph execution resumes (<a href="https://github.com/vandenn/learn-with-genai/blob/8372d4a58becafa9e7d1e5263c7f064b42da9026/backend/src/logic/ai_tutor/nodes/consent/note_consent.py#L6"><code>/backend/src/logic/ai_tutor/nodes/consent/note_consent.py
 </code></a>)</figcaption>
 
-In the `graph.stream` loop, the call to `interrupt` is handled by looking for the `"__interrupt__"` property as follows.
+In the `graph.astream` loop, the call to `interrupt` is handled by looking for the `"__interrupt__"` property as follows.
 
 ```python
-for step_result in graph.stream(graph_input, config):
+async for step_result in graph.astream(graph_input, config):
 	if "__interrupt__" in step_result:
 		interrupt_type = step_result["__interrupt__"][0].value["type"]
 		if interrupt_type == "note_consent":
@@ -332,7 +329,7 @@ for step_result in graph.stream(graph_input, config):
 	...
 ```
 
-<figcaption>Handling the <code>"__interrupt__"</code> property and reading from it (<a href="https://github.com/vandenn/learn-with-genai/blob/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8/backend/src/logic/ai_tutor/graphs/main.py#L88"><code>/backend/src/logic/ai_tutor/graphs/main.py</code></a>)</figcaption>
+<figcaption>Handling the <code>"__interrupt__"</code> property and reading from it (<a href="https://github.com/vandenn/learn-with-genai/blob/8372d4a58becafa9e7d1e5263c7f064b42da9026/backend/src/logic/ai_tutor/graphs/main.py#L85"><code>/backend/src/logic/ai_tutor/graphs/main.py</code></a>)</figcaption>
 
 ## Rendering the `consent` and `note` messages in the frontend
 
@@ -359,7 +356,7 @@ To show you what it looks like in the frontend, the `consent` message `type` is 
 ...
 ```
 
-<figcaption>Handling <code>consent</code> messages (<a href="https://github.com/vandenn/learn-with-genai/blob/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8/frontend/src/components/AIAssistant.tsx#L66"><code>/frontend/src/components/AIAssistant.tsx</code></a>)</figcaption>
+<figcaption>Handling <code>consent</code> messages (<a href="https://github.com/vandenn/learn-with-genai/blob/8372d4a58becafa9e7d1e5263c7f064b42da9026/frontend/src/components/AIAssistant.tsx#L66"><code>/frontend/src/components/AIAssistant.tsx</code></a>)</figcaption>
 
 ![Learn with GenAI "consent" Message UI](/images/blog/2025-10-13-stateless-api-hitl-langgraph/learn_with_genai_consent_message.png)
 
@@ -375,7 +372,7 @@ if (data.type === "note") {
 ...
 ```
 
-<figcaption>Handling <code>note</code> messages (<a href="https://github.com/vandenn/learn-with-genai/blob/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8/frontend/src/components/AIAssistant.tsx#L64"><code>/frontend/src/components/AIAssistant.tsx</code></a>)</figcaption>
+<figcaption>Handling <code>note</code> messages (<a href="https://github.com/vandenn/learn-with-genai/blob/8372d4a58becafa9e7d1e5263c7f064b42da9026/frontend/src/components/AIAssistant.tsx#L64"><code>/frontend/src/components/AIAssistant.tsx</code></a>)</figcaption>
 
 # Q: Wait, why can't I just treat the user approval as a fresh graph execution instead?
 
@@ -400,8 +397,8 @@ Even without existing implementation in the agentic framework you're using, **yo
 
 # Final notes
 
-You can find all the source code used here in the [Learn with GenAI repository (permalinked to the latest commit as of writing)](https://github.com/vandenn/learn-with-genai/tree/1b6a4ad67624f0ecdc6d0b8e8b075b58c2ac7fa8).
+You can find all the source code used here in the [Learn with GenAI repository (permalinked to the latest commit as of writing)](https://github.com/vandenn/learn-with-genai/tree/8372d4a58becafa9e7d1e5263c7f064b42da9026).
 
 You can also find more examples of how you can [use LangGraph for human-in-the-loop in their documentation here](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/add-human-in-the-loop/#approve-or-reject). While my current code implementation may not apply perfectly for future versions of LangGraph, I hope this blog post still helps give you an idea of how to use it in a stateless setting.
 
-**Lastly, the Learn with GenAI repository is still very much a work-in-progress** that I tinker with from time to time, so if you have any suggestions or thoughts about this approval process implementation, please feel free to [reach out](mailto:evan.livelo@gmail.com) or even raise a PR! For example, while writing this, I realized that there were some synchronous calls (like the `SqliteSaver`) being made within `async` handlers in the code, which I'll need to refactor sometime. 😆
+**Lastly, the Learn with GenAI repository is still very much a work-in-progress** that I tinker with from time to time, so if you have any suggestions or thoughts about this approval process implementation, please feel free to [reach out](mailto:evan.livelo@gmail.com) or even raise a PR!
