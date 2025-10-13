@@ -60,6 +60,8 @@ Each node in this state graph is an individual function that takes in the curren
 
 ![Learn with GenAI Logic Directory Structure](/images/blog/2025-10-13-stateless-api-hitl-langgraph/learn_with_genai_logic_directory.png)
 
+<figcaption>Learn with GenAI Logic Directory Structure</figcaption>
+
 When a user message comes in, the system calls the logic function that builds the graph, initializes state, and executes the graph node by node through a `graph.stream` loop, yielding output messages (as a streaming response in the endpoint) from each node in the graph it goes through and associating each message with a `type` to let the frontend know how to handle it.
 
 ```python
@@ -73,6 +75,8 @@ for step_result in graph.stream(graph_input, config):
                 "content": output_message["content"],
             }
 ```
+
+<figcaption>main.py</figcaption>
 
 For example, in the first node "Analyze Query", it determines what course of action to take depending on the user message. Based on the its decision, it yields the a corresponding `"type": "step"` message.
 
