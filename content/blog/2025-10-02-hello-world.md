@@ -28,9 +28,7 @@ cat README.md
 
 ![Diagram](/images/blog/2025-10-02-hello-world/diagram.png)
 
-<center>
-<i>I came up with this random diagram mainly for image rendering.</i>
-</center>
+<figcaption>I came up with this random diagram mainly for image rendering.</figcaption>
 
 # Cheers!
 

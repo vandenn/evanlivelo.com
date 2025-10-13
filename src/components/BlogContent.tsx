@@ -46,10 +46,15 @@ export default function BlogContent({ content }: BlogContentProps) {
         <img src={src} alt={alt || ''} className="max-w-full h-auto" />
       </span>
     ),
+    figcaption: ({ children, ...props }: any) => (
+      <figcaption className="text-center -mt-4" {...props}>
+        {children}
+      </figcaption>
+    ),
   };
 
   return (
-    <div className="prose max-w-none prose-pre:bg-transparent [&_pre]:!p-0 [&_pre]:!m-0 prose-code:before:content-none prose-code:after:content-none">
+    <div className="prose max-w-none prose-pre:bg-transparent [&_pre]:!p-0 prose-code:before:content-none prose-code:after:content-none prose-img:my-2">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}

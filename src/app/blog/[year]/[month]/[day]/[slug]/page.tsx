@@ -3,6 +3,7 @@ import { getBlogPost, getBlogFiles } from '@/lib/markdown';
 import Title from '@/components/Title';
 import LinkButton from '@/components/LinkButton';
 import BlogContent from '@/components/BlogContent';
+import Comments from '@/components/Comments';
 import { MailIcon } from '@/components/icons';
 import SocialIconButton from '@/components/SocialIconButton';
 import { GitHubIcon, LinkedInIcon, SocialsMailIcon } from '@/components/icons';
@@ -135,6 +136,10 @@ export default async function BlogPost({
             Get in touch
           </LinkButton>
         </div>
+
+        <hr className="my-4" />
+
+        <Comments title={post.frontmatter.title} />
       </article>
     </>
   );
